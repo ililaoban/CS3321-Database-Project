@@ -1,14 +1,24 @@
 import {Button, Table} from "antd";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {queryTrain} from "../train";
 
 
 
-const data = [{trainNo:"K666",startEndStation:(<><p>锦州</p><p>上海</p></>), startEndTime:"今天", duration:"15小时", highSleeper:"15",
-    softSeat:"售罄", other:<Link to="/purchase"><Button>预定</Button></Link>}]
+// const trainInfo = [{trainNo:"K666", startStation:"锦州", endStation:"上海", startTime:"今天", EndTime:"明天",
+//     duration:"15小时", highSleeper:"15",softSeat:"售罄"}]
+
+
+// const data = [{trainNo:"K666",startEndStation:(<><p>锦州</p><p>上海</p></>), startEndTime:"今天", duration:"15小时", highSleeper:"15",
+//     softSeat:"售罄", other:<Link to="/purchase"><Button>预定</Button></Link>}]
 
 
 
-const TrainList = () =>{
+const TrainList = (props) =>{
+
+
+
+
     const columns = [{
         title: "车次",
         dataIndex: "trainNo",
@@ -36,7 +46,7 @@ const TrainList = () =>{
         title:(<>特等座<br/>商务座</>),
         dataIndex: "businessSeat",
         key: "businessSeat",
-        align: "center"
+        align: "center",
     },{
         title: "一等座",
         dataIndex: "firstSeat",
@@ -90,7 +100,7 @@ const TrainList = () =>{
     }]
 
 
-    return (<Table columns={columns} dataSource={data}/>)
+    return (<Table columns={columns} dataSource={props.trainInfo}/>)
 }
 
 export default TrainList;

@@ -9,6 +9,8 @@ import UserTickerList from "./component/UserTicketList";
 import TrainList from "./component/TrainList";
 import TicketPurchase from "./component/TicketPurchase";
 import Home from "./route/Home";
+import UserTicketListPage from "./route/UserTicketListPage";
+import TicketPurchasePage from "./route/TicketPurchasePage";
 
 const router = createBrowserRouter([
     {
@@ -21,13 +23,13 @@ const router = createBrowserRouter([
             },
             {
                 path:"user",
-                element:<UserTickerList/>
+                element:<UserTicketListPage/>
             },{
                 path:"train",
                 element:<TrainList/>
             },{
                 path:"purchase",
-                element:<TicketPurchase/>
+                element:<TicketPurchasePage/>
             }
         ]
     },
