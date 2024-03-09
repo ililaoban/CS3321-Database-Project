@@ -13,7 +13,7 @@ def refund():
     return jsonify(dic) 
 
 
-@app.route("/train/<int:id>",methods=['POST'])
+@app.route("/train/<int:id>",methods=['POST','GET'])
 def queryTrain(id):
     # 获取path中的参数
     dic = {"result":True, "userId":id}

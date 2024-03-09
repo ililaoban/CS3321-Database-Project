@@ -8,11 +8,15 @@ import {queryTrain} from "../train";
 import {Link} from "react-router-dom";
 
 
+
+
+
+
 const Home = () =>{
 
     const [trainInfo, setTrainInfo] = useState(null)
 
-    useEffect(() => {
+    const updateTrainInfo = (start, end, date)=>{
         queryTrain(1).then(trainInfo=>{
             const data = trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,
                 startEndStation:(<><p>{train.startStation}</p><p>{train.endStation}</p></>),
@@ -29,14 +33,18 @@ const Home = () =>{
                 other:<Link to="/purchase"><Button>预定</Button></Link>}))
             setTrainInfo(data)
         })
-    }, []);
+    }
+
+    // useEffect(() => {
+    //     updateTrainInfo(1,1,1)
+    // }, []);
 
 
 
 
 return (<Layout>
         <Sider style={{backgroundColor:"white", }} width={"auto"} >
-            <TicketQuery/>
+            <TicketQuery updateTrainInfo={updateTrainInfo}/>
         </Sider>
         <Content>
             <div  style={{ margin: '20px 16px 0',}}>

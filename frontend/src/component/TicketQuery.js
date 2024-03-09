@@ -4,22 +4,19 @@ import {useState} from "react";
 import dayjs from 'dayjs';
 
 
-const dateFormat = 'YYYY-MM-DD';
+
 
 const textStyle = {textAlign:"center"}
-const content = (<DatePicker
-    defaultValue={dayjs('2024-02-25', dateFormat)}
-    minDate={dayjs('2024-02-25', dateFormat)}
-    maxDate={dayjs('2024-04-11', dateFormat)}
-/>)
 
 
-const TicketQuery = () =>{
+
+const TicketQuery = (props) =>{
 
 
     //start and end
     const [start, setStart] = useState("北京")
     const [end, setEnd] = useState("上海")
+    const [date, setDate] = useState(dayjs())
 
     function swapStartEnd(){
         const tmp = end
@@ -44,17 +41,27 @@ const TicketQuery = () =>{
         </Row>
             <Row>
                 <Col span={24}>
-                    {content}
+                    <DatePicker
+                        defaultValue={dayjs()}
+                        minDate={dayjs()}
+                        maxDate={dayjs().add(14,'day')}
+                        onChange={(date, dateString)=>{
+                            console.log(dateString)
+                            setDate(date)
 
-
+                        }}
+                    />
                     <spanp> 今天</spanp>
                 </Col>
             </Row>
             <Row>
                 <Col span={24}>
-                    <Link to = "#">
-                    <h1 style={{textAlign:"center", color:"white", backgroundColor:"#3b98fa"}}>查询车票</h1>
-                    </Link>
+                    <Button style={{width:"100%", marginTop:"10px", backgroundColor:"#3b97f8", color:"white"}}
+                        onClick = {()=>{
+                            props.updateTrainInfo(start, end, date)
+                        }}>
+                        查询车票
+                    </Button>
                 </Col>
             </Row>
 
