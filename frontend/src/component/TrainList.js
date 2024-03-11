@@ -100,7 +100,7 @@ const TrainList = (props) =>{
     }]
 
 
-    return (<Table columns={columns} dataSource={props.trainInfo}/>)
+    return (<Table tableLayout="fixed" columns={columns} dataSource={props.trainInfo}/>)
 }
 
 export default TrainList;

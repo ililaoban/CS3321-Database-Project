@@ -4,14 +4,6 @@ import {Link} from "react-router-dom";
 import TrainInfoList from "./TrainInfoList";
 import {getTrainSchedule} from "../train";
 
-// const testInfos = [{start:"锦州南", end:"上海虹桥", trainNo:"G1202",date:"2024-02-22", time:"13:01", passenger:"苏展",
-//                         seatLevel:"二等座", coachNo:"14", //车厢号
-//                         seatNo:"16D", //座位号
-//                         ticketType:"学生票", price:"597.0", ticketState:"已出站"}]
-
-const content = "sz"
-
-
 
 
 const TrainInfoPopover = (props)=>{

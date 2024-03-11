@@ -1,4 +1,4 @@
-import TicketPriceBox from "./TIcketPriceBox";
+import TicketPriceBox from "./TicketPriceBox";
 import {Card} from "antd";
 import React from "react";
 

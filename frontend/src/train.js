@@ -17,7 +17,7 @@ export async function getUserTicketList(id){
 
 export async function queryTrain(condition){
     const trainInfo = [{trainNo:"K666", startStation:"锦州", endStation:"上海", startTime:"今天", EndTime:"明天",
-        duration:"15小时", highSleeper:"15",softSeat:"售罄"},
+        duration:"15小时", highSleeper:"15",softSeat:"售罄",trainNoOnly:"K666-1"},
         {trainNo:"K6647", startStation:"北京", endStation:"上海", startTime:"今天", EndTime:"明天",
             duration:"15小时", softSleeper:"13",highSleeper:"15",softSeat:"售罄"}]
     return trainInfo
@@ -40,10 +40,10 @@ export async function getTrainSchedule(trainId){
 }
 
 
-export async function getAvailableTicketInfo(tranId){
+export async function getAvailableTicketInfo(trainNoOnly){
     const ticketInfo = {
         startStation: "上海", endStation: "锦州", startDate: "2024-02-28", startTime:"20:08",dayOfWeek: "周三",
-        trainNo:"K188", endTime:"18:23", priceInfo: [
+        trainNo:trainNoOnly||"K188", endTime:"18:23", priceInfo: [
             {
                 key:1,
                 seatType:"硬座",
@@ -67,3 +67,47 @@ export async function getPassengerInfo(userId){
     ]
     return passengerInfo;
 }
+
+export async function getCityStationList(){
+    const options = [
+        {
+            value: 'Shanghai',
+            label: '上海市',
+            children: [
+                {
+                    value: 'Shanghai',
+                    label: '上海市',
+                    children: [
+                        {
+                            value: '上海虹桥',
+                            label: '上海虹桥',
+                        },
+                        {
+                            value: '上海南',
+                            label: '上海南',
+                            disabled: true,
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            value: 'Jiangsu',
+            label: '江苏省',
+            children: [
+                {
+                    value: '南京市',
+                    label: '南京市',
+                    children: [
+                        {
+                            value: '南京南',
+                            label: '南京南',
+                        },
+                    ],
+                },
+            ],
+        },
+    ];
+    return options;
+}
+

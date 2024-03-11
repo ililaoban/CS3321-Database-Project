@@ -6,7 +6,7 @@ import {Link, Outlet} from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 
 export default function Root(){
-    return (<Layout style={{height:"100vh"}}>
+    return (<Layout style={{minHeight:"100vh"}}>
         <Header style={{backgroundColor:"#3b98fa", height:"auto"}}>
             <Row>
                 <Col span={22}>

@@ -5,14 +5,14 @@ import TicketQuery from "../component/TicketQuery";
 import TrainList from "../component/TrainList";
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
-import {Link} from "react-router-dom";
-
+import {Link,useNavigate} from "react-router-dom";
 
 
 
 
 
 const Home = () =>{
+    let navigate = useNavigate();
 
     const [trainInfo, setTrainInfo] = useState(null)
 
@@ -30,7 +30,9 @@ const Home = () =>{
                 hardSleeper:train.hardSleeper,
                 softSeat:train.softSeat,
                 noSeat:train.noSeat,
-                other:<Link to="/purchase"><Button>预定</Button></Link>}))
+                other:<Button onClick={()=>{
+                    navigate('./purchase', {state:{trainNoOnly:train.trainNoOnly}})
+                }}>预定</Button>}))
             setTrainInfo(data)
         })
     }
@@ -43,7 +45,7 @@ const Home = () =>{
 
 
 return (<Layout>
-        <Sider style={{backgroundColor:"white", }} width={"auto"} >
+        <Sider style={{backgroundColor:"transparent"}} width={"auto"} >
             <TicketQuery updateTrainInfo={updateTrainInfo}/>
         </Sider>
         <Content>
