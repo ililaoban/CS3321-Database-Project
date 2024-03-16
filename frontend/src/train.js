@@ -1,17 +1,27 @@
+import axios from 'axios';
 
 
 export async function getUserTicketList(id){
-    return [{
-        start: "锦州南", end: "北京西", trainNo: "G1202", date: "2024-02-22", time: "13:01", passenger: "苏展",
-        seatLevel: "二等座", coachNo: "14", //车厢号
-        seatNo: "16D", //座位号
-        ticketType: "学生票", price: "597.0", ticketState: "已出站"
-    },{
-        start: "锦州南", end: "上海虹桥", trainNo: "G1203", date: "2024-02-22", time: "13:01", passenger: "苏展",
-        seatLevel: "二等座", coachNo: "14", //车厢号
-        seatNo: "16D", //座位号
-        ticketType: "学生票", price: "597.0", ticketState: "已出站"
-    }];
+
+    axios.post("http://127.0.0.1:5000/queryTicket", {userId:'123'})
+        .then(res => {
+        console.log("请求结果:", res.data);
+    }).catch(err => {
+        console.log("错误信息:", err);
+    });
+
+
+    // return [{
+    //     start: "锦州南", end: "北京西", trainNo: "G1202", date: "2024-02-22", time: "13:01", passenger: "苏展",
+    //     seatLevel: "二等座", coachNo: "14", //车厢号
+    //     seatNo: "16D", //座位号
+    //     ticketType: "学生票", price: "597.0", ticketState: "已出站"
+    // },{
+    //     start: "锦州南", end: "上海虹桥", trainNo: "G1203", date: "2024-02-22", time: "13:01", passenger: "苏展",
+    //     seatLevel: "二等座", coachNo: "14", //车厢号
+    //     seatNo: "16D", //座位号
+    //     ticketType: "学生票", price: "597.0", ticketState: "已出站"
+    // }];
 
 }
 

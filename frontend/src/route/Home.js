@@ -6,7 +6,7 @@ import TrainList from "../component/TrainList";
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
 import {Link,useNavigate} from "react-router-dom";
-
+import axios from 'axios';
 
 
 
@@ -17,16 +17,21 @@ const Home = () =>{
     const [trainInfo, setTrainInfo] = useState(null)
 
     const updateTrainInfo = (start, end, date)=>{
-        queryTrain(1).then(trainInfo=>{
+        const params = {startStation:start,
+                        endStation:end,
+                        startDay:date};
+        axios.post("http://127.0.0.1:5000/query",params)
+            .then(res=> res.data)
+            .then(trainInfo=>{
             const data = trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,
                 startEndStation:(<><p>{train.startStation}</p><p>{train.endStation}</p></>),
                 startEndTime:(<><p>{train.startTime}</p><p>{train.EndTime}</p></>), duration:train.duration,
-                businessSeat:train.businessSeat,
+                specialSeatAndBusinessSeat:train.specialSeatAndBusinessSeat,
                 firstSeat:train.firstSeat,
-                secondSeat:train.secondSeat,
+                secondSeatAndSecondBoxSeat:train.secondSeatAndSecondBoxSeat,
                 superSoftSleeper:train.superSoftSleeper,
-                softSleeper:train.softSleeper,
-                highSleeper:train.highSleeper,
+                softSleeperAndFirstSleeper:train.softSleeperAndFirstSleeper,
+                secondAndHardSleeper:train.secondAndHardSleeper,
                 hardSleeper:train.hardSleeper,
                 softSeat:train.softSeat,
                 noSeat:train.noSeat,

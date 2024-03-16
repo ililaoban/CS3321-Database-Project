@@ -54,8 +54,8 @@ const TrainList = (props) =>{
         align: "center"
     },{
         title:(<>二等座<br/>二等包座</>),
-        dataIndex: "secondSeat",
-        key:"secondSeat",
+        dataIndex: "secondSeatAndSecondBoxSeat",
+        key:"secondSeatAndSecondBoxSeat",
         align: "center"
     },{
         title: "高级软卧",
@@ -64,8 +64,8 @@ const TrainList = (props) =>{
         align: "center"
     },{
         title: (<>软卧<br/>一等卧</>),
-        dataIndex: "softSleeper",
-        key:"softSleeper",
+        dataIndex: "softSleeperAndFirstSleeper",
+        key:"softSleeperAndFirstSleeper",
         align: "center"
     },{
         title: "动卧",
@@ -74,8 +74,8 @@ const TrainList = (props) =>{
         align: "center"
     },{
         title:(<>硬卧<br/>二等卧</>),
-        dataIndex: "hardSleeper",
-        key:"hardSleeper",
+        dataIndex: "secondSleeperAndHardSleeper",
+        key:"secondSleeperAndHardSleeper",
         align: "center"
     },{
         title:"软座",

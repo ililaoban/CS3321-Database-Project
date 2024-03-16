@@ -1,18 +1,23 @@
 import UserTicketList from "../component/UserTicketList";
 import {getUserTicketList} from "../train";
 import {useEffect, useState} from "react";
+import axios from 'axios';
 
 
 const UserTicketListPage = ()=>{
     const [trainInfo, setTrainInfo] = useState(null);
 
     useEffect(() => {
-        getUserTicketList(10).then(trainInfo=>{
-            setTrainInfo(trainInfo)
-        })
+        axios.post("http://127.0.0.1:5000/queryTicket", {userId:'123'})
+            .then(res => {
+                console.log("请求结果:", res.data);
+                setTrainInfo(res.data)
+            }).catch(err => {
+            console.log("错误信息:", err);
+        });
     }, []);
 
-   if (trainInfo)
+
         return (<UserTicketList trainInfo={trainInfo}/>)
 
 

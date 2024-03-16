@@ -30,7 +30,7 @@ const TrainInfoPopover = (props)=>{
 
 const buildTrainInfo = (info)=>
     (<div>
-        <h3>{info.start}->{info.end}
+        <h3>{info.startStation}->{info.endStation}
             <Space wrap>
                 <TrainInfoPopover info={info}/>
 
@@ -39,21 +39,21 @@ const buildTrainInfo = (info)=>
 {/*            <Link to={`/train/${info.trainNo}`}> {info.trainNo}
             </Link>*/}
             </h3>
-        <p>{info.date}  {info.time} 开</p>
+        <p>{info.startDay}  {info.startTime} 开</p>
     </div>)
 
 
 const buildPassengerInfo = (info) => (
     <div>
-        <p>{info.passenger}</p>
+        <p>{info.passengerName}</p>
         <p>中国居民身份证</p>
     </div>
 )
 
 const buildSeatInfo = (info)=>
     (<div>
-        <p>{info.seatLevel}</p>
-        <p>{info.coachNo}车 {info.seatNo}号</p>
+        <p>{info.seatType}</p>
+        <p>{info.carriageNo}车 {info.seatNo}号</p>
     </div>)
 
 
@@ -61,7 +61,7 @@ const buildTicketPrice = (info) =>
     (
         <div>
             <p>{info.ticketType}</p>
-            <p>{info.price} 元</p>
+            <p>{info.ticketPrice} 元</p>
         </div>
     )
 
@@ -106,9 +106,12 @@ const columns = [
 
 const UserTickerList = (props) =>{
 
+    let data = null
     const testInfos = props.trainInfo
-    const data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
-                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:testInfo.ticketState})))
+    if (testInfos)
+    {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
+                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:testInfo.ticketStatus})))}
+
 
 
     return (<Table columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>)};

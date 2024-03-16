@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app,supports_credentials=True)
+app.config['JSON_AS_ASCII'] = False
 
 
 @app.route("/train/<int:id>", methods=["POST"])
@@ -22,15 +25,17 @@ def queryTrain2():
 @app.route("/query", methods=["POST"])
 def queryBasedOnStartEndTime():
     # 预计请求正文格式：{"startStation":"北京","endStation":"上海","day”:"2019-01-01"}
-    startStation = request.form["startStation"]
-    endStation = request.form["endStation"]
-    startDay = request.form["startDay"]
+    data = request.get_json()
+    startStation = data["startStation"]
+    endStation = data["endStation"]
+    startDay = data["startDay"]
 
     # 预计返回格式：{"车次":"G101","出发站"："北京","到达站":"上海","出发时间":"2019-01-01 08:00","到达时间":"2019-01-01 12:00","历时":"4小时",
     # "特等座":"10000","商务座":"1000","一等座":"800","二等座":"500","二等包座":"500","高级软卧":"400","软卧":"400","一等卧":"400","动卧":"400","硬卧":"300","二等卧":"400","软座":"400","硬座":"200","无座":"100"}
 
     # DB query 待实现
-    dic = {
+    dic = [{
+        "trainNoOnly":"1234",
         "trainNo": "G101",
         "startStation": "北京",
         "endStation": "上海",
@@ -39,6 +44,7 @@ def queryBasedOnStartEndTime():
         "duration": "4小时",
         "specialSeat": "10000",
         "businessSeat": "1000",
+        "specialSeatAndBusinessSeat":"2000",
         "firstSeat": "800",
         "secondSeat": "500",
         "secondBoxSeat": "500",
@@ -53,7 +59,7 @@ def queryBasedOnStartEndTime():
         "softSeat": "400",
         "hardSeat": "200",
         "noSeat": "100",
-    }
+    }]
     return jsonify(dic)
 
 
@@ -104,11 +110,10 @@ def queryTicket():
     """
     用户id:123
     """
-    userId = request.form["userId"]
+    userId = request.get_json()["userId"]
 
     # 查询购票信息 待实现
     # 返回购票信息
-    result = True
     ticketList = [
         {
             "trainNo": "G101",
@@ -122,14 +127,14 @@ def queryTicket():
             "carriageNo": "1",
             "seatNo": "2",
             "ticketStatus": "未出行",
+            "passengerName":"汤师爷",
+            "ticketPrice": "597.0"
         }
     ]
 
-    dic = {
-        "result": result,
-        "ticketList": ticketList,
-    }
-    return jsonify(dic)
+
+
+    return jsonify(ticketList)
 
 
 # 场景四实现:退票
