@@ -20,7 +20,9 @@ const Home = () =>{
         const params = {startStation:start,
                         endStation:end,
                         startDay:date};
-        axios.post("http://127.0.0.1:5000/query",params)
+        const apiUrl = process.env.REACT_APP_BASE_URL
+
+        axios.post(apiUrl+"/query",params)
             .then(res=> res.data)
             .then(trainInfo=>{
             const data = trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,

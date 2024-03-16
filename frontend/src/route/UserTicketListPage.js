@@ -6,9 +6,9 @@ import axios from 'axios';
 
 const UserTicketListPage = ()=>{
     const [trainInfo, setTrainInfo] = useState(null);
-
+    const apiUrl = process.env.REACT_APP_BASE_URL
     useEffect(() => {
-        axios.post("http://127.0.0.1:5000/queryTicket", {userId:'123'})
+        axios.post(apiUrl+"/queryTicket", {userId:'123'})
             .then(res => {
                 console.log("请求结果:", res.data);
                 setTrainInfo(res.data)
