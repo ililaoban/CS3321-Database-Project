@@ -3,7 +3,7 @@ import {Button, Popover, Space, Table, Tag} from 'antd';
 import {Link} from "react-router-dom";
 import TrainInfoList from "./TrainInfoList";
 import {getTrainSchedule} from "../train";
-
+import TicketCard from"./TicketCard";
 
 
 const TrainInfoPopover = (props)=>{
@@ -45,7 +45,13 @@ const buildTrainInfo = (info)=>
 
 const buildPassengerInfo = (info) => (
     <div>
-        <p>{info.passengerName}</p>
+        <p>
+            {info.passengerName}
+            &ensp;
+            <Popover content={<TicketCard/>}>
+                <span style={{color:"#56a7f3",textDecoration: "underline"}}>行程信息提示</span>
+            </Popover>
+        </p>
         <p>中国居民身份证</p>
     </div>
 )
@@ -114,5 +120,5 @@ const UserTickerList = (props) =>{
 
 
 
-    return (<Table columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>)};
+    return (<Table  tableLayout="fixed" columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>)};
 export default UserTickerList;

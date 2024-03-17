@@ -11,6 +11,7 @@ import TicketPurchase from "./component/TicketPurchase";
 import Home from "./route/Home";
 import UserTicketListPage from "./route/UserTicketListPage";
 import TicketPurchasePage from "./route/TicketPurchasePage";
+import TicketCard from "./component/TicketCard";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
             },{
                 path:"purchase",
                 element:<TicketPurchasePage/>
+            },{
+                path:"ticket",
+                element: <TicketCard/>
             }
         ]
     },

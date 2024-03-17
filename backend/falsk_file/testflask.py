@@ -55,10 +55,11 @@ def queryBasedOnStartEndTime():
         "highSleeper": "400",
         "hardSleeper": "300",
         "secondSleeper": "400",
-        "secondAndHardSleeper": "700",
+        "secondSleeperAndHardSleeper": "700",
         "softSeat": "400",
-        "hardSeat": "200",
+        #"hardSeat": "200",
         "noSeat": "100",
+        "avaliable":True
     }]
     return jsonify(dic)
 

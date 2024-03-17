@@ -1,22 +1,30 @@
 import {Button, Table} from "antd";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
 
 
-
-// const trainInfo = [{trainNo:"K666", startStation:"锦州", endStation:"上海", startTime:"今天", EndTime:"明天",
-//     duration:"15小时", highSleeper:"15",softSeat:"售罄"}]
-
-
-// const data = [{trainNo:"K666",startEndStation:(<><p>锦州</p><p>上海</p></>), startEndTime:"今天", duration:"15小时", highSleeper:"15",
-//     softSeat:"售罄", other:<Link to="/purchase"><Button>预定</Button></Link>}]
-
-
-
 const TrainList = (props) =>{
-
-
+    let navigate = useNavigate();
+    const trainInfo = props.trainInfo;
+    const data = trainInfo ? (trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,
+        startEndStation:(<><p>{train.startStation}</p><p>{train.endStation}</p></>),
+        startEndTime:(<><p>{train.startTime}</p><p>{train.endTime}</p></>), duration:train.duration,
+        specialSeatAndBusinessSeat:train.specialSeatAndBusinessSeat||"---",
+        firstSeat:train.firstSeat||"---",
+        secondSeatAndSecondBoxSeat:train.secondSeatAndSecondBoxSeat||"---",
+        superSoftSleeper:train.superSoftSleeper||"---",
+        softSleeperAndFirstSleeper:train.softSleeperAndFirstSleeper||"---",
+        secondAndHardSleeper:train.secondAndHardSleeper||"---",
+        highSleeper:train.highSleeper||"---",
+        secondSleeperAndHardSleeper:train.secondSleeperAndHardSleeper||"---",
+        hardSeat:train.hardSeat||"---",
+        softSeat:train.softSeat||"---",
+        noSeat:train.noSeat||"---",
+        other:<Button disabled={!train.avaliable} onClick={()=>{
+            navigate('./purchase', {state:{trainNoOnly:train.trainNoOnly}})
+        }}>预定</Button>}))
+    ):null;
 
 
     const columns = [{
@@ -44,8 +52,8 @@ const TrainList = (props) =>{
         align: "center"
     },{
         title:(<>特等座<br/>商务座</>),
-        dataIndex: "businessSeat",
-        key: "businessSeat",
+        dataIndex: "specialSeatAndBusinessSeat",
+        key: "specialSeatAndBusinessSeat",
         align: "center",
     },{
         title: "一等座",
@@ -100,7 +108,7 @@ const TrainList = (props) =>{
     }]
 
 
-    return (<Table tableLayout="fixed" columns={columns} dataSource={props.trainInfo}/>)
+    return (<Table tableLayout="fixed" columns={columns} dataSource={data}/>)
 }
 
 export default TrainList;

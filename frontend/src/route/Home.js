@@ -12,7 +12,6 @@ import axios from 'axios';
 
 
 const Home = () =>{
-    let navigate = useNavigate();
 
     const [trainInfo, setTrainInfo] = useState(null)
 
@@ -25,29 +24,35 @@ const Home = () =>{
         axios.post(apiUrl+"/query",params)
             .then(res=> res.data)
             .then(trainInfo=>{
-            const data = trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,
-                startEndStation:(<><p>{train.startStation}</p><p>{train.endStation}</p></>),
-                startEndTime:(<><p>{train.startTime}</p><p>{train.EndTime}</p></>), duration:train.duration,
-                specialSeatAndBusinessSeat:train.specialSeatAndBusinessSeat,
-                firstSeat:train.firstSeat,
-                secondSeatAndSecondBoxSeat:train.secondSeatAndSecondBoxSeat,
-                superSoftSleeper:train.superSoftSleeper,
-                softSleeperAndFirstSleeper:train.softSleeperAndFirstSleeper,
-                secondAndHardSleeper:train.secondAndHardSleeper,
-                hardSleeper:train.hardSleeper,
-                softSeat:train.softSeat,
-                noSeat:train.noSeat,
-                other:<Button onClick={()=>{
-                    navigate('./purchase', {state:{trainNoOnly:train.trainNoOnly}})
-                }}>预定</Button>}))
-            setTrainInfo(data)
+            setTrainInfo(trainInfo)
         })
     }
 
-    // useEffect(() => {
-    //     updateTrainInfo(1,1,1)
-    // }, []);
 
+    useEffect(() => {
+        const savedState = sessionStorage.getItem('trainInfo');
+        if (savedState) {
+            try {
+                // 假设trainInfo应该是一个对象
+                const parsedState = JSON.parse(savedState);
+                setTrainInfo(parsedState);
+            } catch (error) {
+                console.error("Failed to parse trainInfo from sessionStorage:", error);
+                // 可以设置一个默认状态或者根据实际情况处理错误
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        try {
+            if (trainInfo) { // 假设trainInfo是一个对象，需要转换成字符串保存
+                const serializedState = JSON.stringify(trainInfo);
+                sessionStorage.setItem('trainInfo', serializedState);
+            }
+        } catch (error) {
+            console.error("Failed to serialize trainInfo for sessionStorage:", error);
+        }
+    }, [trainInfo]);
 
 
 
