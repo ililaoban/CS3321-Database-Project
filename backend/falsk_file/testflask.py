@@ -129,6 +129,7 @@ def queryTicket():
             "seatNo": "2",
             "ticketStatus": "未出行",
             "passengerName":"汤师爷",
+            "sfzNo":"1345342134356",
             "ticketPrice": "597.0"
         }
     ]

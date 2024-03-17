@@ -48,7 +48,7 @@ const buildPassengerInfo = (info) => (
         <p>
             {info.passengerName}
             &ensp;
-            <Popover content={<TicketCard/>}>
+            <Popover content={<TicketCard ticketInfo={info}/>}>
                 <span style={{color:"#56a7f3",textDecoration: "underline"}}>行程信息提示</span>
             </Popover>
         </p>
@@ -116,7 +116,7 @@ const UserTickerList = (props) =>{
     const testInfos = props.trainInfo
     if (testInfos)
     {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
-                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:testInfo.ticketStatus})))}
+                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:testInfo.ticketStatus,})))}
 
 
 
