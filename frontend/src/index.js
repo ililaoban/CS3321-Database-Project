@@ -12,6 +12,10 @@ import Home from "./route/Home";
 import UserTicketListPage from "./route/UserTicketListPage";
 import TicketPurchasePage from "./route/TicketPurchasePage";
 import TicketCard from "./component/TicketCard";
+import UserLoginPage from './route/UserLoginPage';
+import UserRegisterInitPage from './route/UserRegisterInitPage';
+import UserRegisterCompletePage from './route/UserRegisterCompletePage';
+
 
 const router = createBrowserRouter([
     {
@@ -35,6 +39,15 @@ const router = createBrowserRouter([
             },{
                 path:"ticket",
                 element: <TicketCard/>
+            },{
+                path:"login",
+                element:<UserLoginPage/>
+            },{
+                path:"register/init",
+                element:<UserRegisterInitPage/>
+            },{
+                path:"register/complete",
+                element:<UserRegisterCompletePage/>
             }
         ]
     },
