@@ -21,7 +21,7 @@ const TrainList = (props) =>{
         hardSeat:train.hardSeat||"---",
         softSeat:train.softSeat||"---",
         noSeat:train.noSeat||"---",
-        other:<Button disabled={!train.avaliable} onClick={()=>{
+        other:<Button disabled={!train.available} onClick={()=>{
             navigate('./purchase', {state:{trainNoOnly:train.trainNoOnly}})
         }}>预定</Button>}))
     ):null;
