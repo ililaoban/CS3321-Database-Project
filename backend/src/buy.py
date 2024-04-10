@@ -1,4 +1,4 @@
-from sqlUtils import newSqlSession
+from utils import newSqlSession
 
 def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     conn, cursor = newSqlSession()

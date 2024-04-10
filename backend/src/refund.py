@@ -1,4 +1,4 @@
-from sqlUtils import newSqlSession
+from utils import newSqlSession
 
 def refundTicket(ticketNo):
         conn, cursor = newSqlSession()
