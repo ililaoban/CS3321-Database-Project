@@ -36,7 +36,7 @@ def refundTicket(ticketNo):
         DELETE FROM Trip
         WHERE ticketNo=%s 
         ''', ticketNo)
-        conn.commit()
+        #conn.commit()
 
         cursor.execute('''
         SELECT bitmap
@@ -54,7 +54,7 @@ def refundTicket(ticketNo):
         cursor.execute('''UPDATE Seat
         SET bitmap = %s
         WHERE carriageNo=%s AND trainNoONly=%s AND seatNo=%s''', (newbitmap, carriageNo, trainNoOnly, seatNo))
-        conn.commit()
+        #conn.commit()
 
         print('Success: Rund ticket No.', ticketNo)
         cursor.close()
@@ -63,5 +63,5 @@ def refundTicket(ticketNo):
 
 
 if __name__ == '__main__':
-        ticketNo = 12
+        ticketNo = 7
         refundTicket(ticketNo)

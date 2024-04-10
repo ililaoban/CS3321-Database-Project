@@ -35,7 +35,7 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     '''
     cursor.execute(sql_insert_query, (trainNoOnly, carriageNo, seatNo, startStation, endStation,sfzNo))
     # 尝试提交更改
-    conn.commit()
+    #conn.commit()
 
     print("Book Ticket successful.")
     print("-------------------------")
@@ -47,7 +47,7 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
                 SET bitmap = %s
                 WHERE (carriageNo,trainNoOnly,seatNo) = (%s,%s,%s)
                 ''',(newBit, carriageNo, trainNoOnly, seatNo))
-    conn.commit()
+    #conn.commit()
     print("Success!")
 
 
