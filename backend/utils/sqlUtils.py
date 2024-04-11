@@ -1,4 +1,4 @@
-from basicConfigs import sqlConfig
+from .basicConfigs import sqlConfig
 import pymysql
 
 def createBotDataDb():

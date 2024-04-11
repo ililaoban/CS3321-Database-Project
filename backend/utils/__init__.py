@@ -1,2 +1,2 @@
-from sqlUtils import newSqlSession
+from .sqlUtils import newSqlSession
 __all__ = ["newSqlSession"]
