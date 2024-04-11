@@ -107,9 +107,9 @@ const TicketQuery = (props) =>{
                         maxDate={dayjs().add(14,'day')}
                         onChange={(date, dateString)=>{
                             console.log(dateString)
-                            setDate(date)
                             if (date)
                             {
+                                setDate(date)
                                 const serializedDate = date.toISOString();
                                 sessionStorage.setItem('date', serializedDate);
                             }

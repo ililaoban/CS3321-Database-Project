@@ -7,7 +7,7 @@ const FilteredTrainList = (props) =>{
     const trainInfo = props.trainInfo;
     
     const trainTypeOptions = [
-        {label: 'GC-高铁/城际', value: 'G',}, 
+        {label: 'GC-高铁/城际', value: 'G',},
         {label: 'D-动车', value: 'D',}, 
         {label: 'Z-直达', value: 'Z',}, 
         {label: 'T-特快', value: 'T',}, 
@@ -128,9 +128,9 @@ const FilteredTrainList = (props) =>{
         <div style={{backgroundColor:"white", padding:20,marginBottom:15 , borderRadius: 10}}>
         车次类型: <Checkbox.Group options={trainTypeOptions} defaultValue={trainTypeOptions.map(option => option.value)} onChange={handleTrainTypeChange} />
         <br/>
-        出发站: <Checkbox.Group options={startStationOptions} value={selectedStartStations} onChange={handleStartStationChange} />
+        出发车站: <Checkbox.Group options={startStationOptions} value={selectedStartStations} onChange={handleStartStationChange} />
         <br/>
-        到达站: <Checkbox.Group options={endStationOptions} value={selectedEndStations} onChange={handleEndStationChange} />
+        到达车站: <Checkbox.Group options={endStationOptions} value={selectedEndStations} onChange={handleEndStationChange} />
         <br/>
         车次席别: <Checkbox.Group options={seatTypeOptions} defaultValue={seatTypeOptions.map(option => option.value)} onChange={handleSeatTypeChange} />
 
