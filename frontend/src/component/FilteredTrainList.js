@@ -1,5 +1,5 @@
 import Checkbox from "antd/es/checkbox/Checkbox";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Content} from "antd/es/layout/layout";
 import TrainList from "./TrainList";
 
@@ -27,19 +27,19 @@ const FilteredTrainList = (props) =>{
 
 
     const seatTypeOptions = [
-    {label: '特等座', value: 'specialSeat',},
-    {label: '商务座', value: 'businessSeat',},
+    // {label: '特等座', value: 'specialSeat',},
+    // {label: '商务座', value: 'businessSeat',},
     {label: '特等座/商务座', value: 'specialSeatAndBusinessSeat',},
     {label: '一等座', value: 'firstSeat',},
-    {label: '二等座', value: 'secondSeat',},
-    {label: '二等包座', value: 'secondBoxSeat',},
+    // {label: '二等座', value: 'secondSeat',},
+    // {label: '二等包座', value: 'secondBoxSeat',},
     {label: '二等座/二等包座', value: 'secondSeatAndSecondBoxSeat',},
     {label: '高级软卧', value: 'superSoftSleeper',},
-    {label: '一等卧', value: 'fistSleeper',},
+    // {label: '一等卧', value: 'fistSleeper',},
     {label: '软卧/一等卧', value: 'softSleeperAndFirstSleeper',},
     {label: '动卧', value: 'highSleeper',},
-    {label: '硬卧', value: 'hardSleeper',},
-    {label: '二等卧', value: 'secondSleeper',},
+    // {label: '硬卧', value: 'hardSleeper',},
+    // {label: '二等卧', value: 'secondSleeper',},
     {label: '硬卧/二等卧', value: 'secondSleeperAndHardSleeper',},
     {label: '软座', value: 'softSeat',},
     {label: '硬座', value: 'hardSeat',},
@@ -112,28 +112,32 @@ const FilteredTrainList = (props) =>{
             : []; // return an empty array if trainInfo is null
     }
 
-
+    useEffect(() => {
+        setSelectedStartStations(startStationOptions.map(
+            option => option.value
+        ))
+        setSelectedEndStations(endStationOptions.map(
+            option => option.value
+        ))
+    }, [trainInfo]);
 
 
 
     return(
-        <Content>
-        <div>
+        <div >
+        <div style={{backgroundColor:"white", padding:20,marginBottom:15 , borderRadius: 10}}>
         车次类型: <Checkbox.Group options={trainTypeOptions} defaultValue={trainTypeOptions.map(option => option.value)} onChange={handleTrainTypeChange} />
-        </div>
-        <div>
-        出发站: <Checkbox.Group options={startStationOptions} defaultValue={startStationOptions.map(option => option.value)} onChange={handleStartStationChange} />
-        </div>
-        <div>
-        到达站: <Checkbox.Group options={endStationOptions} defaultValue={endStationOptions.map(option => option.value)} onChange={handleEndStationChange} />
-        </div>
-        <div>
+        <br/>
+        出发站: <Checkbox.Group options={startStationOptions} value={selectedStartStations} onChange={handleStartStationChange} />
+        <br/>
+        到达站: <Checkbox.Group options={endStationOptions} value={selectedEndStations} onChange={handleEndStationChange} />
+        <br/>
         车次席别: <Checkbox.Group options={seatTypeOptions} defaultValue={seatTypeOptions.map(option => option.value)} onChange={handleSeatTypeChange} />
+
         </div>
-    <div>
         <TrainList trainInfo={getFilterInfo(trainInfo)}/>
+
     </div>
-</Content>
 
     )
 }

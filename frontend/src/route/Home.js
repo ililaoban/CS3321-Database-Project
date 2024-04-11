@@ -25,6 +25,8 @@ const Home = () =>{
             .then(res=> res.data)
             .then(trainInfo=>{
             setTrainInfo(trainInfo)
+        }).catch(error=>{
+            console.error(error);
         })
     }
 

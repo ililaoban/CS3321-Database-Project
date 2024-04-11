@@ -2,15 +2,10 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import random
 
-
-
-
-
 ### fake data
 location=["北京","上海","南京","苏州","无锡","常州","镇江","淮安","连云港"]
 passengername=['汤师爷','李白','杜甫','李清照','白居易','王安石','苏轼','辛弃疾','陆游','李煜']
 trainNo=["G101","G102","G103","G104","G105","G106","G107","G108","G109","G110"]
-
 
 
 
@@ -20,12 +15,8 @@ app.config['JSON_AS_ASCII'] = False
 
 
 
-
-
-
-
-@app.route("/", methods=["POST"])
-def hello(id):
+@app.route("/", methods=["POST", "GET"])
+def hello():
     # 获取path中的参数
     return "hello world!"
 
@@ -72,12 +63,11 @@ def queryBasedOnStartEndTime():
         "softSleeperAndFirstSleeper": "800",
         "highSleeper": "400",
         "hardSleeper": "300",
-        "secondSleeper": "400",
         "secondSleeperAndHardSleeper": "700",
         "softSeat": "400",
         #"hardSeat": "200",
         "noSeat": "100",
-        "avaliable":True
+        "available":True
 
     }]
     return jsonify(dic)
@@ -460,4 +450,4 @@ def userInfoChange():
     return jsonify(dic)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8963, debug=True)
+    app.run(host="localhost", port=5000, debug=True)
