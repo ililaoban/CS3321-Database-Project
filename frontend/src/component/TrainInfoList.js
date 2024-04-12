@@ -18,23 +18,23 @@ const columns = [
     },
     {
         title: '到站时间',
-        dataIndex: 'arriveTime',
+        dataIndex: 'trainArriveTime',
         align: 'center',
         key: 'arriveTime',
     },
     {
         title: '出发时间',
         key: 'leaveTime',
-        dataIndex: 'leaveTime',
+        dataIndex: 'trainDepartTime',
         align: 'center',
 
     },
     {
         title: '停留时间',
         key: 'remainTime',
-        dataIndex:'remainTime',
+        dataIndex:'stopTime',
         align: "center",
-        render:(text)=>((text === "----") ?"----": text+"分钟")
+        render:(text)=>((text === "----") ?"----": text)
 
     },
 ];

@@ -4,6 +4,9 @@ import {Link} from "react-router-dom";
 import TrainInfoList from "./TrainInfoList";
 import {getTrainSchedule} from "../train";
 import TicketCard from"./TicketCard";
+import axios from 'axios';
+
+const apiUrl = process.env.REACT_APP_BASE_URL
 
 
 const TrainInfoPopover = (props)=>{
@@ -13,11 +16,18 @@ const TrainInfoPopover = (props)=>{
 
 
     function fetchTrainSchedule(){
-        getTrainSchedule(22).then(
-            data =>{
-                setSchedule(data)
-            }
-        )
+        const params = {trainNoOnly:info.trainNoOnly};
+
+        axios.post(apiUrl+"/trainNo/initialLaunchTime_2",params)
+            .then(res=> res.data)
+            .then(trainInfo=>{
+                //console.log(trainInfo.stations);
+                setSchedule(trainInfo.stations);
+            }).catch(error=>{
+            console.error(error);
+        })
+
+
     }
 
     //const schedule = getTrainSchedule(22)

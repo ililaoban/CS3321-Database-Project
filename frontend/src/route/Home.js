@@ -3,7 +3,9 @@ import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
 import TicketQuery from "../component/TicketQuery";
 import FilteredTrainList from "../component/FilteredTrainList";
-import FilteredTrainList_2 from "../component/FilteredTrainList_2"
+import FilteredTrainList_2 from "../component/FilteredTrainList_2";
+import ScheduleQuery from "../component/ScheduleQuery";
+import TrainSchedule from "../component/TrainSchedule";
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
 import {Link,useNavigate} from "react-router-dom";
@@ -13,7 +15,6 @@ import axios from 'axios';
 
 
 const Home = () =>{
-
     const [trainInfo, setTrainInfo] = useState(null)
 
     const updateTrainInfo = (start, end, date)=>{
@@ -62,6 +63,7 @@ const Home = () =>{
 return (<Layout>
         <Sider style={{backgroundColor:"transparent"}} width={"auto"} >
             <TicketQuery updateTrainInfo={updateTrainInfo}/>
+            <TrainSchedule/>
         </Sider>
         <Content>
             <div  style={{ margin: '20px 16px 0',}}>

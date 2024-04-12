@@ -163,6 +163,7 @@ def queryTicket():
     # 返回购票信息
     ticketList = [
         {
+            "trainNoOnly": "G101",
             "trainNo": "G101",
             "startDay": "2019-01-01",
             "startTime": "08:00",
@@ -227,7 +228,7 @@ def queryInitialLaunchTime_1():
 # 08	连云港	11:45	12:18	33分钟
 
     dic = {
-            "trainNo": "G101",
+            "trainNo": trainNo,
             "initialLaunchTime": "08:00",
             "stations": [
                 {
