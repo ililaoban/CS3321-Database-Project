@@ -177,7 +177,7 @@ def queryTicket():
             "ticketStatus": "未出行",
             "passengerName": passengername[random.randint(0,9)],
             "sfzNo":"1345342134356",
-            "ticketPrice": "597.0"
+            "ticketPrice": "5997.0"
         }
     ]
 
@@ -394,9 +394,9 @@ def cityStation():
                     {
                         'stationName': '上海南站',
                     },
-                    {
-                        'cityName': '上海市',
-                    }
+                    # {
+                    #     'cityName': '上海市',
+                    # }
                 ],
             },
         ],
@@ -408,11 +408,11 @@ def cityStation():
                 'cityName': '南京市',
                 "children": [
                     {
-                        'stationName': '南京南',
+                        'stationName': '南京南站',
                     },
-                    {
-                        'cityName': '南京市',
-                    }
+                    # {
+                    #     'cityName': '南京市',
+                    # }
                 ],
             },
         ],

@@ -3,11 +3,13 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import dayjs from 'dayjs';
 import CityStationSelector from "./CityStationSelector"
-import {getCityStationList} from "../train";
+//import {getCityStationList} from "../train";
 import DateDiffBox from "./DateDiffBox"
-
+import axios from "axios";
 
 const textStyle = {textAlign:"center"}
+const apiUrl = process.env.REACT_APP_BASE_URL
+
 
 
 
@@ -25,6 +27,41 @@ const TicketQuery = (props) =>{
         const tmp = end
         setEnd(start);
         setStart(tmp);
+    }
+
+    const stations2options = (stations) =>{
+        const options = stations.map(province=>({
+                value:province.provinceName,
+                label:province.provinceName,
+                children: province.children.map(
+                    city=>({
+                            value:city.cityName,
+                            label:city.cityName,
+                            children:city.children.map(
+                                station=>({
+                                        value:station.stationName,
+                                        label:station.stationName
+                                })
+                        )
+                    })
+            )
+        }))
+
+        return options;
+    }
+
+    const getCityStationList = () =>{
+        axios.post(apiUrl+'/cityStationList')
+            .then(
+                res=> res.data)
+            .then(
+                stations =>{
+                    //console.log(stations);
+                    const options =stations2options(stations);
+                    //console.log("options is ", options)
+                    setOptions(options)
+                }
+            )
     }
 
     useEffect(() => {
@@ -47,15 +84,18 @@ const TicketQuery = (props) =>{
             setDate(dayjs());
         }
 
-        getCityStationList().then(options=>{
-            setOptions(options);
-        })
+        // getCityStationList().then(options=>{
+        //     setOptions(options);
+        // })
+
 
 
     }, []);
 
 
-
+    useEffect(() => {
+        getCityStationList();
+    }, []);
 
     useEffect(()=>{
         if (start)
