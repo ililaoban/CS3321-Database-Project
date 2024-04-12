@@ -109,14 +109,25 @@ const columns = [
     },
 ];
 
+const buildticketStatus =(ticketStatus, ticketNo)=>{
 
+
+    return (<div>
+            <p style={{fontWeight:600, marginBottom:10}}>{ticketStatus}</p>
+            <Button onClick={()=>{
+                console.log("refund: No.", ticketNo);
+            }}> 退票</Button>
+        </div>
+
+    )
+}
 const UserTickerList = (props) =>{
 
     let data = null
     const testInfos = props.trainInfo
     if (testInfos)
     {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
-                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:testInfo.ticketStatus,})))}
+                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:buildticketStatus(testInfo.ticketStatus,testInfo.ticketNo),})))}
 
 
 

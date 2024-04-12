@@ -145,8 +145,7 @@ const FilterBar = (props)=>{
     </Checkbox.Group>
 
         <br/>
-        到达车站:
-        <Checkbox.Group key={`end-${endStations.join('-')}`}
+        到达车站: <Checkbox.Group key={`end-${endStations.join('-')}`}
                         defaultValue={endStations}
                         onChange={(checkedValues) => {
                             console.log('checked = ', checkedValues);
