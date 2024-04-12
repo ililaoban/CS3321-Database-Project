@@ -3,6 +3,7 @@ import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
 import TicketQuery from "../component/TicketQuery";
 import FilteredTrainList from "../component/FilteredTrainList";
+import FilteredTrainList_2 from "../component/FilteredTrainList_2"
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
 import {Link,useNavigate} from "react-router-dom";
@@ -64,7 +65,7 @@ return (<Layout>
         </Sider>
         <Content>
             <div  style={{ margin: '20px 16px 0',}}>
-                <FilteredTrainList trainInfo={trainInfo}/>
+                <FilteredTrainList_2 trainInfo={trainInfo}/>
             </div>
 
         </Content>

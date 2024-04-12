@@ -2,6 +2,7 @@ import Checkbox from "antd/es/checkbox/Checkbox";
 import {useState, useEffect} from "react";
 import {Content} from "antd/es/layout/layout";
 import TrainList from "./TrainList";
+import FilterBar from "./FilterBar";
 
 const FilteredTrainList = (props) =>{
     const trainInfo = props.trainInfo;
@@ -17,6 +18,7 @@ const FilteredTrainList = (props) =>{
 
     const startStationOptions = (props.trainInfo?.map(train => ({
         label: train.startStation,
+        checked: true,
         value: train.startStation,
     }))) || [];
 
@@ -113,6 +115,8 @@ const FilteredTrainList = (props) =>{
     }
 
     useEffect(() => {
+        console.log("startstationoptions is ", startStationOptions);
+        console.log("selectedStation is ", selectedStartStations);
         setSelectedStartStations(startStationOptions.map(
             option => option.value
         ))
@@ -121,16 +125,24 @@ const FilteredTrainList = (props) =>{
         ))
     }, [trainInfo]);
 
+    const defaultStartStaions = startStationOptions.map(
+        option => option.value
+    );
+
+    const defaultEndStaions =endStationOptions.map(
+        option => option.value
+    );
 
 
     return(
         <div >
+
         <div style={{backgroundColor:"white", padding:20,marginBottom:15 , borderRadius: 10}}>
         车次类型: <Checkbox.Group options={trainTypeOptions} defaultValue={trainTypeOptions.map(option => option.value)} onChange={handleTrainTypeChange} />
         <br/>
-        出发车站: <Checkbox.Group options={startStationOptions} value={selectedStartStations} onChange={handleStartStationChange} />
+        出发车站: <Checkbox.Group options={startStationOptions} key={defaultStartStaions}  onChange={handleStartStationChange} />
         <br/>
-        到达车站: <Checkbox.Group options={endStationOptions} value={selectedEndStations} onChange={handleEndStationChange} />
+        到达车站: <Checkbox.Group options={endStationOptions} key={defaultEndStaions}defaultValue={defaultEndStaions} onChange={handleEndStationChange} />
         <br/>
         车次席别: <Checkbox.Group options={seatTypeOptions} defaultValue={seatTypeOptions.map(option => option.value)} onChange={handleSeatTypeChange} />
 

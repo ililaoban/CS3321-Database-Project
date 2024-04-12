@@ -69,6 +69,31 @@ def queryBasedOnStartEndTime():
         "noSeat": "100",
         "available":True
 
+    },{"trainNoOnly":"12345",
+        "trainNo": "G1011",
+        "startStation": location[random.randint(0,8)],
+        "endStation": location[random.randint(0,8)],
+        "startTime": "2019-01-01 08:00",
+        "endTime": "2019-01-01 12:00",
+        "duration": "4小时",
+        "specialSeat": "10000",
+        "businessSeat": "1000",
+        "specialSeatAndBusinessSeat":"2000",
+        "firstSeat": "800",
+        "secondSeat": "500",
+        "secondBoxSeat": "500",
+        "secondSeatAndSecondBoxSeat": "1000",
+        "superSoftSleeper": "400",
+        "fistSleeper": "400",
+        "softSleeperAndFirstSleeper": "800",
+        "highSleeper": "400",
+        "hardSleeper": "300",
+        "secondSleeperAndHardSleeper": "700",
+        "softSeat": "400",
+        #"hardSeat": "200",
+        "noSeat": "100",
+        "available":True
+
     }]
     return jsonify(dic)
 
