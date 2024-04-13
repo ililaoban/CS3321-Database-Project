@@ -53,7 +53,7 @@ const ScheduleQuery = (props)=>{
                 <Input style={{width: 160}} placeholder="请输入" onChange={(e)=>{
                     console.log("TrainNo is ", e.target.value);
                     setTrainNo(e.target.value);
-                }}/>;
+                }}/>
             </div>
             <Button style={{ marginLeft:"7%", width:"86%", backgroundColor:"#3b97f8", color:"white", marginBottom:20}}
                     onClick={()=>{

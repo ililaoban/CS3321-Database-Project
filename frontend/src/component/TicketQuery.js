@@ -119,36 +119,63 @@ const TicketQuery = (props) =>{
 
 
     return (
-        <div style={{width:"250px",padding:"25px",backgroundColor:"white", height:"210px"}}>
-        <Row>
-           <Col span={9}>
-               <Popover content={<CityStationSelector setStation={setStart} options={options}/>}>
-                   <h3 style={{textAlign: "left"}}>{start}</h3>
-               </Popover>
-           </Col>
-            <Col span={5}>
-                <Button onClick={swapStartEnd} style={{backgroundColor:"transparent", height:"auto", padding:"0", border:0}}>
-                    <img src="exchange.png" style={{width: "50px", margin: "0"}}/>
-                </Button>
-            </Col>
-            <Col span={10}>
-                <Popover content={<CityStationSelector setStation={setEnd} options={options}/>}>
-                <h3 style={{textAlign:"right"}}>{end}</h3>
-                </Popover>
-            </Col>
-        </Row>
-            <Row style={{marginTop:"5px"}}>
+        <div style={{width: "250px", padding: "25px", backgroundColor: "white", height: "210px"}}>
+
+            <Row style={{marginBottom:20}}>
+                <Col span={17} style={{paddingLeft:0}}>
+                    <div style={{marginBottom:20}}>
+                    <span style={{
+                                    color: "#3b98fa",
+                                    borderWidth: 3,
+                                    borderStyle: "solid",
+                                    borderRadius: 5,
+                                    padding: 2,
+                                    fontWeight: 600
+                                }}>
+                出发
+            </span>
+                        &ensp;
+                        <Popover content={<CityStationSelector setStation={setStart} options={options}/>}>
+                        <span style={{textAlign: "left", fontWeight:700}}>{start}</span>
+                    </Popover>
+                    </div>
+                    <div>
+                        <span style={{
+                                        color: "#ffcc00",
+                                        borderWidth: 3,
+                                        borderStyle: "solid",
+                                        borderRadius: 5,
+                                        padding: 2,
+                                        fontWeight: 600
+                                    }}>
+                到达
+            </span>&ensp;
+                        <Popover content={<CityStationSelector setStation={setEnd} options={options}/>}>
+                            <span style={{textAlign: "left",fontWeight:700}}>{end}</span>
+                        </Popover>
+                    </div>
+
+
+                </Col>
+
+                <Col span={5}>
+                    <Button onClick={swapStartEnd}
+                            style={{backgroundColor: "transparent", height: "auto", padding: "0", border: 0}}>
+                        <img src="exchange.png" style={{width: "50px", margin: "0"}}/>
+                    </Button>
+                </Col>
+            </Row>
+            <Row style={{marginTop: "5px"}}>
                 <Col span={24}>
                     <DatePicker
-                        style={{width:"120px"}}
-                        defaultValue = {dayjs()}
-                       value={date}
+                        style={{width: "120px"}}
+                        defaultValue={dayjs()}
+                        value={date}
                         minDate={dayjs()}
-                        maxDate={dayjs().add(14,'day')}
-                        onChange={(date, dateString)=>{
+                        maxDate={dayjs().add(14, 'day')}
+                        onChange={(date, dateString) => {
                             console.log(dateString)
-                            if (date)
-                            {
+                            if (date) {
                                 setDate(date)
                                 const serializedDate = date.toISOString();
                                 sessionStorage.setItem('date', serializedDate);
@@ -156,21 +183,21 @@ const TicketQuery = (props) =>{
                         }}
                     />
                     &ensp;&ensp;
-                    <DateDiffBox  date = {date}/>
+                    <DateDiffBox date={date}/>
                 </Col>
             </Row>
-            <Row style={{marginTop:"5px"}}>
+            <Row style={{marginTop: "5px"}}>
                 <Col span={24}>
                     {contextHolder}
 
-                    <Button style={{width:"100%", marginTop:"10px", backgroundColor:"#3b97f8", color:"white"}}
-                        onClick = {()=>{
-                            if (start==end)
-                                messageApi.info('始发站与终到站不可相同！');
-                            else
-                            props.updateTrainInfo(start, end, date)
-                        }}
-                            >
+                    <Button style={{width: "100%", marginTop: "10px", backgroundColor: "#3b97f8", color: "white"}}
+                            onClick={() => {
+                                if (start == end)
+                                    messageApi.info('始发站与终到站不可相同！');
+                                else
+                                    props.updateTrainInfo(start, end, date)
+                            }}
+                    >
                         查询车票
                     </Button>
                 </Col>
