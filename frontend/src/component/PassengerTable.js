@@ -10,32 +10,32 @@ const columns = [{
     title:"序号",
     dataIndex:"index",
     key:"index",
-    width:60
+    width:"5%"
 },{
     title: "票种",
     dataIndex :"ticketType",
     key:"ticketType",
-    width: 150
+    width: "12%"
 },{
     title: "席别",
     dataIndex:"seatLevel",
     key: "seatLevel",
-    width: 350
+    width: "27%"
 },{
     title: "姓名",
     dataIndex:"passengerName",
     key:"passengerName",
-    width: 120,
+    width: "9%",
 },{
     title: "证件类型",
     dataIndex: "idType",
     key:"idType",
-    width: 300
+    width: "23%"
 },{
     title: "证件号码",
     dataIndex: "idNo",
     key:"idNo",
-    width: 300
+    width: "23%"
 }]
 
 
@@ -68,11 +68,11 @@ const PassengerTable = (props)=> {
 
     const data = selectedPassenger?(selectedPassenger.map((value,index)=>(
         {index:index+1,
-            ticketType: <Select defaultValue={ticketType[0]} options={ticketType} style={{width: 90,}}/>,
-            passengerName:<Input style={{width:"100px",color:"#000000",backgroundColor:"#ffffff"}} disabled={true} value={value.passengerName}/>,
-            seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"270px"}}/>,
-            idType:<Select defaultValue={idType[0]} options={idType} style={{width: 210,}}/>,
-            idNo:<Input disabled={true} value={value.idNo} style = {{color:"#000000",backgroundColor:"#ffffff"}}/>}
+            ticketType: <Select defaultValue={ticketType[0]} options={ticketType} style={{width: "70%",}}/>,
+            passengerName:<Input style={{width:"100%",color:"#000000",backgroundColor:"#ffffff"}} disabled={true} value={value.passengerName}/>,
+            seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"90%"}}/>,
+            idType:<Select defaultValue={idType[0]} options={idType} style={{minWidth: "80%",}}/>,
+            idNo:<Input disabled={true} value={value.idNo} style = {{color:"#000000",backgroundColor:"#ffffff", minWidth:"90%"}}/>}
     ))):null;
 
 
