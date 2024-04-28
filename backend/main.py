@@ -2,6 +2,11 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import random
 
+import src
+from src import *
+from utils import *
+
+
 ### fake data
 location=["北京","上海","南京","苏州","无锡","常州","镇江","淮安","连云港"]
 passengername=['汤师爷','李白','杜甫','李清照','白居易','王安石','苏轼','辛弃疾','陆游','李煜']
@@ -37,6 +42,14 @@ def queryBasedOnStartEndTime():
     startStation = data["startStation"]
     endStation = data["endStation"]
     startDay = data["startDay"]
+
+    ###虽然第一阶段开发只考虑一个唯一车次，但是为了前后端统一，这里暂定返回相同的内容
+    results = query(startStation, endStation, startDay)
+    for result in results:
+        result["trainNo"]=result["trainNoOnly"]
+    
+    return jsonify(results)
+
 
     # 预计返回格式：{"车次":"G101","出发站"："北京","到达站":"上海","出发时间":"2019-01-01 08:00","到达时间":"2019-01-01 12:00","历时":"4小时",
     # "特等座":"10000","商务座":"1000","一等座":"800","二等座":"500","二等包座":"500","高级软卧":"400","软卧":"400","一等卧":"400","动卧":"400","硬卧":"300","二等卧":"400","软座":"400","硬座":"200","无座":"100"}
@@ -158,6 +171,16 @@ def queryTicket():
     用户id:123
     """
     userId = request.get_json()["userId"]
+
+    
+    results = src.queryTicket(userId)
+
+    for result in results:
+        result["trainNo"]=result["trainNoOnly"]
+        
+
+    return jsonify(results)
+
     passengername=['汤师爷','李白','杜甫','李清照','白居易','王安石','苏轼','辛弃疾','陆游','李煜']
     # 查询购票信息 待实现
     # 返回购票信息
@@ -214,6 +237,10 @@ def refund():
 def queryInitialLaunchTime_1():
     data=request.get_json()
     trainNo=data['trainNo']
+
+
+
+    
     initialLaunchTime=data['initialLaunchTime']
     
 
@@ -297,6 +324,9 @@ def queryInitialLaunchTime_1():
 def queryInitialLaunchTime_2():
     data=request.get_json()
     trainNoOnly=data['trainNoOnly']
+    result = trainSchedule(trainNoOnly)
+    result["trainNo"]=result["trainNoOnly"]
+    return jsonify(result)
 
     
 
@@ -381,6 +411,7 @@ def queryInitialLaunchTime_2():
 @app.route("/cityStationList", methods=["POST"])
 def cityStation():
     ###fake data
+    return jsonify(src.cityStationList())
     list=[
     {
         "provinceName": '上海市',
@@ -426,6 +457,10 @@ def cityStation():
 def passengerInformation():
     data=request.get_json()
     userId=data['userId']
+    results = src.passengerInformation(userId)
+    return jsonify(results)
+
+
     fake_data={
             "passengerName": passengername[random.randint(0,9)],
             "sfzNo": "1345342134356",
