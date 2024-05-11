@@ -14,18 +14,32 @@ const TicketPurchasePage = ()=>{
 
     const [ticketInfo, setTicketInfo] = useState(null)
     const [passengerInfo, setPassengerInfo] = useState(null)
+    const apiUrl = process.env.REACT_APP_BASE_URL
 
     // const getAvailableTicketInfo = (trainNoOnly)=>{
     //
     // }
 
-    useEffect(() => {
+    useEffect(()=>{
         getAvailableTicketInfo(trainNoOnly).then(ticketInfo=>{
             setTicketInfo(ticketInfo)
         })
-        getPassengerInfo(11).then(passengerInfo=>{
-            setPassengerInfo(passengerInfo)
-        })
+    }, [])
+
+    useEffect(() => {
+        const userId = localStorage.getItem('userId');
+
+
+        // getPassengerInfo(userId||'11').then(passengerInfo=>{
+        //     setPassengerInfo(passengerInfo)
+        // })
+        axios.post(apiUrl+"/passengerInformation", {userId:userId||'123'})
+            .then(res => {
+                console.log("请求结果:", res.data);
+                setPassengerInfo(res.data)
+            }).catch(err => {
+            console.log("错误信息:", err);
+        });
 
     }, []);
 

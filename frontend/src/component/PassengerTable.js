@@ -10,7 +10,7 @@ const columns = [{
     title:"序号",
     dataIndex:"index",
     key:"index",
-    width:"5%"
+    minWidth:"5%"
 },{
     title: "票种",
     dataIndex :"ticketType",
@@ -68,7 +68,7 @@ const PassengerTable = (props)=> {
 
     const data = selectedPassenger?(selectedPassenger.map((value,index)=>(
         {index:index+1,
-            ticketType: <Select defaultValue={ticketType[0]} options={ticketType} style={{width: "70%",}}/>,
+            ticketType: <Select defaultValue={ticketType[0]} options={ticketType} style={{minWidth: "70%",}}/>,
             passengerName:<Input style={{width:"100%",color:"#000000",backgroundColor:"#ffffff"}} disabled={true} value={value.passengerName}/>,
             seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"90%"}}/>,
             idType:<Select defaultValue={idType[0]} options={idType} style={{minWidth: "80%",}}/>,

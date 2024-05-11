@@ -61,7 +61,9 @@ const TicketQuery = (props) =>{
                     //console.log("options is ", options)
                     setOptions(options)
                 }
-            )
+            ).catch(error=>{
+            console.error(error);
+        })
     }
 
     useEffect(() => {
