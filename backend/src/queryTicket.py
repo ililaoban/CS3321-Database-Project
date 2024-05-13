@@ -22,6 +22,7 @@ from utils import newSqlSession
 #     "seatNo",
 #     "sfzNo":,
 #     "ticketStatus",
+#     "ticketPrice",
 #     }, ...
 # ]
 def queryTicket(sfzNo):
@@ -57,6 +58,18 @@ def queryTicket(sfzNo):
         result_3 = cursor_1.fetchone()
         result[i]['startDay'] = result_3['startDay']
         result[i]['startTime'] = result_3['startTime']
+
+
+    # 4th to get the ticketPrice
+    for i in range(len(result)):
+        cursor_1.execute('''
+        SELECT ticketPrice
+        FROM Price
+        WHERE trainNoOnly = %s AND startStation = %s AND endStation = %s AND seatType = %s
+        ''', (result[i]['trainNoOnly'], result[i]['startStation'], result[i]['endStation'], result[i]['seatType']))
+        result_4 = cursor_1.fetchone()
+        result[i]['ticketPrice'] = result_4['ticketPrice']
+
     cursor_1.close()
     conn_1.close()
 

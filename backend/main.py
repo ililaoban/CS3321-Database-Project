@@ -510,5 +510,16 @@ def userInfoChange():
     }
     return jsonify(dic)
 
+
+@app.route("/queryTicketBasedOnTrain", methods=["POST"])
+def queryTicketBasedOnTrain():
+    data=request.get_json()
+    trainNoOnly=data['trainNoOnly']
+    startStation=data['startStation']
+    endStation=data['endStation']
+    results = src.queryTicketBasedOnTrain(trainNoOnly, startStation, endStation)
+    return jsonify({"priceInfo":results})
+
+    
 if __name__ == "__main__":
     app.run(host="localhost", port=5000, debug=True)

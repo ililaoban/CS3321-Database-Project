@@ -6,7 +6,7 @@ from .query import query
 from .cityStationList import cityStationList
 from .passengerInformation import passengerInformation
 from .availableTicketQuery import availableTicketQuery
-
+from .queryTicketBasedOnTrain import queryTicketBasedOnTrain
 __all__ = ['buy', 'refundTicket', 'trainSchedule', 
            'queryTicket', 'query', 'cityStationList', 
-           'passengerInformation', 'availableTicketQuery']
+           'passengerInformation', 'availableTicketQuery','queryTicketBasedOnTrain']

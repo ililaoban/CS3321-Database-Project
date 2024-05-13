@@ -38,7 +38,7 @@ from utils import newSqlSession
 #         "hardSeat",
 #         "noSeat",
 #
-#         "availale"
+#         "available"
 #     }, ...
 # ]
 
@@ -116,5 +116,14 @@ def query(startStation, endStation, startDay):
 
     # 6. reorganize the results into a list
     result4 = list(result3.values())
+
+    # 7. add the availale for each train in result4
+    # TODO(BobHuangC): in the 1st-dev stage, we only have 一二等座 / 软硬座, thus the following judge condition only judge the availablity of these seats
+    for _train in result4:
+        _train['availale'] = True if (
+            'firstSeat' in _train.keys() 
+            or 'secondSeat' in _train.keys() 
+            or 'softSeat' in _train.keys() 
+            or 'hardSeat' in _train.keys()) else False
 
     return result4
