@@ -68,7 +68,7 @@ def queryTicket(sfzNo):
         WHERE trainNoOnly = %s AND startStation = %s AND endStation = %s AND seatType = %s
         ''', (result[i]['trainNoOnly'], result[i]['startStation'], result[i]['endStation'], result[i]['seatType']))
         result_4 = cursor_1.fetchone()
-        result[i]['ticketPrice'] = result_4['ticketPrice']
+        result[i]['ticketPrice'] = float(result_4['ticketPrice'])
 
     cursor_1.close()
     conn_1.close()
