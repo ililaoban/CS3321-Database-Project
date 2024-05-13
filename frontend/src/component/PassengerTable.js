@@ -72,7 +72,7 @@ const PassengerTable = (props)=> {
             passengerName:<Input style={{width:"100%",color:"#000000",backgroundColor:"#ffffff"}} disabled={true} value={value.passengerName}/>,
             seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"90%"}}/>,
             idType:<Select defaultValue={idType[0]} options={idType} style={{minWidth: "80%",}}/>,
-            idNo:<Input disabled={true} value={value.idNo} style = {{color:"#000000",backgroundColor:"#ffffff", minWidth:"90%"}}/>}
+            idNo:<Input disabled={true} value={value.sfzNo} style = {{color:"#000000",backgroundColor:"#ffffff", minWidth:"90%"}}/>}
     ))):null;
 
 
