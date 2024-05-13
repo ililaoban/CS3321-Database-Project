@@ -196,8 +196,10 @@ const TicketQuery = (props) =>{
                             onClick={() => {
                                 if (start == end)
                                     messageApi.info('始发站与终到站不可相同！');
-                                else
+                                else{
+
                                     props.updateTrainInfo(start, end, date)
+                                }
                             }}
                     >
                         查询车票
