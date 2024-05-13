@@ -1,4 +1,4 @@
-import {Button, Layout} from "antd";
+import {Button, Layout, message} from "antd";
 import Sider from "antd/es/layout/Sider";
 import {Content} from "antd/es/layout/layout";
 import TicketQuery from "../component/TicketQuery";
@@ -17,6 +17,7 @@ import dayjs from 'dayjs';
 
 const Home = () =>{
     const [trainInfo, setTrainInfo] = useState(null)
+    const [messageApi, contextHolder] = message.useMessage();
 
     const updateTrainInfo = (start, end, date)=>{
         //"2024-04-27T16:00:00.000Z"
@@ -30,8 +31,12 @@ const Home = () =>{
         axios.post(apiUrl+"/query",params)
             .then(res=> res.data)
             .then(trainInfo=>{
-            setTrainInfo(trainInfo)
-        }).catch(error=>{
+                if (trainInfo.length == 0) {
+                    messageApi.error("没有符合条件的车票！")
+                }
+                console.log("traininfo is ", trainInfo)
+                setTrainInfo(trainInfo)
+            }).catch(error=>{
             console.error(error);
         })
     }
@@ -70,6 +75,8 @@ return (<Layout>
             <TrainSchedule/>
         </Sider>
         <Content>
+            {contextHolder}
+
             <div  style={{ margin: '20px 16px 0',}}>
                 <FilteredTrainList_2 trainInfo={trainInfo}/>
             </div>

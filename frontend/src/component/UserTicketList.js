@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {Button, Popover, Space, Table, Tag} from 'antd';
-import {Link} from "react-router-dom";
+import {Button, Popover, Space, Table, Tag, message} from 'antd';
+import {Link, useNavigate } from "react-router-dom";
+//import { useHistory } from 'react-router-dom';
+
 import TrainInfoList from "./TrainInfoList";
 import {getTrainSchedule} from "../train";
 import TicketCard from"./TicketCard";
@@ -119,27 +121,46 @@ const columns = [
     },
 ];
 
-const buildticketStatus =(ticketStatus, ticketNo)=>{
+
+const UserTickerList = (props) =>{
+    let data = null
+    const testInfos = props.trainInfo
+    const [messageApi, contextHolder] = message.useMessage();
+    const history = useNavigate();
+
+
+    const buildticketStatus =(ticketStatus, ticketNo)=>{
+        return (<div>
+                <p style={{fontWeight:600, marginBottom:10}}>{ticketStatus}</p>
+                <Button onClick={()=>{
+                    let url = apiUrl + "/refund"
+                    let userId = localStorage.getItem("userId")
+                    axios.post(url, {
+                        userId:userId,
+                        ticketNo: ticketNo,
+                    }).then(res=>res.data)
+                        .then(res =>{
+                            if (res.result){
+                                messageApi.success("退票成功！")
+                                history(0);
+                            }else{
+                                messageApi.error("退票失败！")
+                            }
+                        })
+
+                    console.log("refund: No.", ticketNo);
+                }}> 退票</Button>
+            </div>
+
+        )
+    }
+    if (testInfos)
+    {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
+        seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:buildticketStatus(testInfo.ticketStatus,testInfo.ticketNo),})))}
 
 
     return (<div>
-            <p style={{fontWeight:600, marginBottom:10}}>{ticketStatus}</p>
-            <Button onClick={()=>{
-                console.log("refund: No.", ticketNo);
-            }}> 退票</Button>
-        </div>
-
-    )
-}
-const UserTickerList = (props) =>{
-
-    let data = null
-    const testInfos = props.trainInfo
-    if (testInfos)
-    {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
-                seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:buildticketStatus(testInfo.ticketStatus,testInfo.ticketNo),})))}
-
-
-
-    return (<Table  tableLayout="fixed" columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>)};
+        {contextHolder}
+        <Table  tableLayout="fixed" columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>
+    </div>)};
 export default UserTickerList;
