@@ -16,14 +16,22 @@ const TicketPurchasePage = ()=>{
     const [passengerInfo, setPassengerInfo] = useState(null)
     const apiUrl = process.env.REACT_APP_BASE_URL
 
-    // const getAvailableTicketInfo = (trainNoOnly)=>{
-    //
-    // }
 
     useEffect(()=>{
-        getAvailableTicketInfo(trainNoOnly).then(ticketInfo=>{
-            setTicketInfo(ticketInfo)
-        })
+        const url = apiUrl + "/queryTicketBasedOnTrain"
+        axios.post(url, {
+            trainNoOnly: trainNoOnly,
+            startStation:"兰州西站",
+            endStation:"北京南站"
+
+        }).then(res=>res.data)
+            .then(ticketInfo=>{
+                setTicketInfo(ticketInfo)
+            }).catch(e=>{
+                console.log(e)
+            }
+        )
+
     }, [])
 
     useEffect(() => {
