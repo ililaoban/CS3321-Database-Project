@@ -27,8 +27,8 @@ def queryTicketBasedOnTrain(trainNoOnly, startStation, endStation):
     WHERE trainNoOnly = %s AND startStation = %s AND endStation = %s
     ''', (trainNoOnly, startStation, endStation))
     result = cursor_1.fetchall()
-
-
+    for i in range(len(result)):
+        result[i]['ticketPrice'] = float(result[i]['ticketPrice'])
   
 
     cursor_1.close()
