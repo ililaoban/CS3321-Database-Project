@@ -120,7 +120,7 @@ def query(startStation, endStation, startDay):
     # 7. add the availale for each train in result4
     # TODO(BobHuangC): in the 1st-dev stage, we only have 一二等座 / 软硬座, thus the following judge condition only judge the availablity of these seats
     for _train in result4:
-        _train['availale'] = True if (
+        _train['available'] = True if (
             'firstSeat' in _train.keys() 
             or 'secondSeat' in _train.keys() 
             or 'softSeat' in _train.keys() 
