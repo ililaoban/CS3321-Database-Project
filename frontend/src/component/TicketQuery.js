@@ -173,8 +173,8 @@ const TicketQuery = (props) =>{
                         style={{width: "120px"}}
                         defaultValue={dayjs()}
                         value={date}
-                        minDate={dayjs()}
-                        maxDate={dayjs().add(14, 'day')}
+                        //minDate={dayjs()}
+                        //maxDate={dayjs().add(14, 'day')}
                         onChange={(date, dateString) => {
                             console.log(dateString)
                             if (date) {

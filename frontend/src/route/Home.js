@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
 import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 
 
@@ -18,9 +19,12 @@ const Home = () =>{
     const [trainInfo, setTrainInfo] = useState(null)
 
     const updateTrainInfo = (start, end, date)=>{
+        //"2024-04-27T16:00:00.000Z"
+        let tmpdate = dayjs(date).format('YYYY-MM-DD');
+
         const params = {startStation:start,
                         endStation:end,
-                        startDay:date};
+                        startDay:tmpdate};
         const apiUrl = process.env.REACT_APP_BASE_URL
 
         axios.post(apiUrl+"/query",params)
