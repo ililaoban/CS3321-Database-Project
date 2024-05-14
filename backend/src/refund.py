@@ -61,7 +61,7 @@ def refundTicket(ticketNo):
 	result3 = cursor.fetchone()
 	if (not result3):
 		print("Train %s Carriage %s  Seat %s bitmap not FOUND"%(trainNoOnly, carriageNo, seatNo))
-		return False
+		return {"result":False}
 
 	bitmap = int.from_bytes(result3['bitmap'], byteorder='big')
 	newbitmap = bitmap | testbit
@@ -72,9 +72,10 @@ def refundTicket(ticketNo):
 	#conn.commit()
 
 	print('Success: Rund ticket No.', ticketNo)
-	return True
 	cursor.close()
 	conn.close()
+	return {"result":True}
+
 
 
 

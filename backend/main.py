@@ -227,8 +227,6 @@ def refund():
     result = True
     dic = {
         "result": result,
-        "userId": userId,
-        "ticketNo": ticketNo,
     }
     return jsonify(dic)
 
@@ -238,7 +236,9 @@ def queryInitialLaunchTime_1():
     data=request.get_json()
     trainNo=data['trainNo']
 
-
+    result = initialLaunchTime_2(trainNo)
+    result["trainNo"]=result["trainNoOnly"]
+    return jsonify(result)
 
     
     initialLaunchTime=data['initialLaunchTime']
@@ -324,7 +324,7 @@ def queryInitialLaunchTime_1():
 def queryInitialLaunchTime_2():
     data=request.get_json()
     trainNoOnly=data['trainNoOnly']
-    result = trainSchedule(trainNoOnly)
+    result = initialLaunchTime_2(trainNoOnly)
     result["trainNo"]=result["trainNoOnly"]
     return jsonify(result)
 
