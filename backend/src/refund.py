@@ -1,6 +1,21 @@
 from utils import newSqlSession
 
 def refundTicket(ticketNo):
+	"""
+	Occassion 4: User Refund the ticket
+
+	input:     
+	{
+        "userId":{string},
+        "ticketNo":{string}
+    }
+
+	output:
+    {    
+        "result":{boolean}
+    }
+	"""
+
 	conn, cursor = newSqlSession()
 	cursor.execute('''
 	SELECT trainNoOnly,carriageNo,seatNo,startStation,endStation
@@ -45,8 +60,8 @@ def refundTicket(ticketNo):
 	''',(carriageNo, trainNoOnly, seatNo))
 	result3 = cursor.fetchone()
 	if (not result3):
-			print("Train %s Carriage %s  Seat %s bitmap not FOUND"%(trainNoOnly, carriageNo, seatNo))
-			return
+		print("Train %s Carriage %s  Seat %s bitmap not FOUND"%(trainNoOnly, carriageNo, seatNo))
+		return False
 
 	bitmap = int.from_bytes(result3['bitmap'], byteorder='big')
 	newbitmap = bitmap | testbit
@@ -57,6 +72,7 @@ def refundTicket(ticketNo):
 	#conn.commit()
 
 	print('Success: Rund ticket No.', ticketNo)
+	return True
 	cursor.close()
 	conn.close()
 

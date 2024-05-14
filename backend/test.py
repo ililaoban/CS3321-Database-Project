@@ -1,4 +1,4 @@
-from src import queryTicket, buy, query, trainSchedule, cityStationList, passengerInformation, availableTicketQuery
+from src import queryTicket, buy, query, initialLaunchTime_1, initialLaunchTime_2, cityStationList, passengerInformation, availableTicketQuery
 
 
 
@@ -30,10 +30,17 @@ print(query(startStation, endStation, startDay))
 print()
 
 
-# # trainSchedule test
-print('trainSchedule test')
+# # initialLaunchTime_1 test
+print('initialLaunchTime_1 test')
 trainNoOnly = 'G1228_2'
-print(trainSchedule(trainNoOnly))
+print(initialLaunchTime_1(trainNoOnly))
+print()
+
+
+# # initialLaunchTime_2 test
+print('initialLaunchTime_2 test')
+trainNoOnly = 'G1228_2'
+print(initialLaunchTime_2(trainNoOnly))
 print()
 
 
