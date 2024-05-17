@@ -4,28 +4,40 @@ from utils import newSqlSession
 # TODO(BobHuangC): In the 1st dev-stage, the userID is replaced by sfzno
 # TODO(BobHuangC): In the 1st dev-stage, there's no trainNo
 # TODO(BobHuangC): In the 1st dev-stage, there's no ticketStatus
-# input: "userId":{string}
 
-# output:     
-# [
-#     {
-#     "trainNoOnly", 
-#     "trainNo",
-#     "startDay",
-#     "startTime",
-#     "startStation",
-#     "endStation",
-#     "seatType",
-#     "ticketType",
-#     "ticketNo",
-#     "carriageNo",
-#     "seatNo",
-#     "sfzNo":,
-#     "ticketStatus",
-#     "ticketPrice",
-#     }, ...
-# ]
+
 def queryTicket(sfzNo):
+    """
+    Occasion 3: The user queries the ticket information he/she bought
+
+    input:
+    {
+        "sfzNo":{string},
+    }
+
+    output:
+    [
+        {
+        "trainNoOnly", 
+        "trainNo",
+        "startDay",
+        "startTime",
+        "startStation",
+        "endStation",
+        "seatType",
+        "ticketType",
+        "ticketNo",
+        "carriageNo",
+        "seatNo",
+        "sfzNo":,
+        "ticketStatus",
+        "ticketPrice",
+        "passengerName",
+        }, ...
+    ]
+    """
+
+
     # 1st to get the trainNoOnly, carriageNo, seatNo, startStation, endStation, ticketType, sfzNo, ticketNo
     conn_1, cursor_1 = newSqlSession()
     cursor_1.execute('''
@@ -69,6 +81,18 @@ def queryTicket(sfzNo):
         ''', (result[i]['trainNoOnly'], result[i]['startStation'], result[i]['endStation'], result[i]['seatType']))
         result_4 = cursor_1.fetchone()
         result[i]['ticketPrice'] = float(result_4['ticketPrice'])
+
+    
+    # 5th to get the passengerName
+    # ATTENTION: One user can buy tickets for other users, thus the passengerName must be corresponding to the sfzNo of each ticket
+    for i in range(len(result)):
+        cursor_1.execute('''
+        SELECT name
+        FROM Passenger
+        WHERE sfzNo = %s
+        ''', result[i]['sfzNo'])
+        result_5 = cursor_1.fetchone()
+        result[i]['passengerName'] = result_5['name']
 
     cursor_1.close()
     conn_1.close()

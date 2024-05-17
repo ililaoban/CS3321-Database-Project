@@ -4,7 +4,7 @@ from utils import newSqlSession
 # Query the ticket based on trainNoOnly rather than trainNo, the time is redundant
 def initialLaunchTime_1(trainNoOnly):
     """
-    Occassion 5.1 The user queries the train timetable based on the trainNoOnly
+    Occasion 5.1 The user queries the train timetable based on the trainNoOnly
     
     input: 
     {
@@ -48,7 +48,16 @@ def initialLaunchTime_1(trainNoOnly):
     result = cursor.fetchall()
     cursor.close()
     conn.close()
-    # return result
+
+    # result time fix
+    for i in result:
+        if i['stopTime'] == None:
+            pass
+        elif i['stopTime'].startswith('00小时00分钟'):
+            i['stopTime'] = i['stopTime'][8:]
+        elif i['stopTime'].startswith('00小时'):
+            i['stopTime'] = i['stopTime'][4:]
+
 
     res = {}
     res['trainNoOnly'] = result[0]['trainNoOnly']
@@ -73,7 +82,7 @@ def initialLaunchTime_1(trainNoOnly):
 # get the train schedule
 def initialLaunchTime_2(trainNoOnly):
     """
-    Occassion 5.2 The user queries the train timetable based on the trainNoOnly
+    Occasion 5.2 The user queries the train timetable based on the trainNoOnly
     
     input:
     {
@@ -105,7 +114,7 @@ def initialLaunchTime_2(trainNoOnly):
 
     conn, cursor = newSqlSession()
     cursor.execute('''
-    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%H小时%%i分钟%%s秒') as stopTime
+    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%H:%%i') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%H:%%i') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%H小时%%i分钟%%s秒') as stopTime
     FROM TrainStation
     WHERE trainNoOnly=%s
     ORDER BY stationOrder
@@ -113,7 +122,16 @@ def initialLaunchTime_2(trainNoOnly):
     result = cursor.fetchall()
     cursor.close()
     conn.close()
-    # return result
+
+    # result time fix
+    for i in result:
+        if i['stopTime'] == None:
+            pass
+        elif i['stopTime'].startswith('00小时00分钟'):
+            i['stopTime'] = i['stopTime'][8:]
+        elif i['stopTime'].startswith('00小时'):
+            i['stopTime'] = i['stopTime'][4:]
+
 
     res = {}
     res['trainNoOnly'] = result[0]['trainNoOnly']

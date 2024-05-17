@@ -222,13 +222,15 @@ def refund():
     userId = data["userId"]
     ticketNo = data["ticketNo"]
     # 退票操作 待实现
+    result = src.refundTicket(ticketNo)
+    return result
 
     # 返回退票结果
-    result = True
-    dic = {
-        "result": result,
-    }
-    return jsonify(dic)
+    # result = True
+    # dic = {
+    #     "result": result,
+    # }
+    # return jsonify(dic)
 
 # 场景五_1实现:查询车次信息
 @app.route("/trainNo/initialLaunchTime_1", methods=["POST"])
