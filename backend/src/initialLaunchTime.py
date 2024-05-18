@@ -49,6 +49,9 @@ def initialLaunchTime_1(trainNoOnly):
     cursor.close()
     conn.close()
 
+    if len(result) == 0:
+        return dict()
+
     # result time fix
     for i in result:
         if i['stopTime'] == None:
@@ -122,6 +125,9 @@ def initialLaunchTime_2(trainNoOnly):
     result = cursor.fetchall()
     cursor.close()
     conn.close()
+
+    if len(result) == 0:
+        return dict()
 
     # result time fix
     for i in result:
