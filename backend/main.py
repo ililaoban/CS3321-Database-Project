@@ -239,7 +239,8 @@ def queryInitialLaunchTime_1():
     trainNo=data['trainNo']
 
     result = initialLaunchTime_2(trainNo)
-    result["trainNo"]=result["trainNoOnly"]
+    if (result):
+        result["trainNo"]=result["trainNoOnly"]
     return jsonify(result)
 
     
