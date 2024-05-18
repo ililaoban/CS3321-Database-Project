@@ -96,7 +96,7 @@ def query(startStation, endStation, startDay):
         if _['seatType'] == '一等座':
             result3[_['trainNoOnly']]['firstSeat'] = '有'
         elif _['seatType'] == '二等座':
-            result3[_['trainNoOnly']]['secondSeat'] = '有'
+            result3[_['trainNoOnly']]['secondSeatAndSecondBoxSeat'] = '有'
         elif _['seatType'] == '软座':
             result3[_['trainNoOnly']]['softSeat'] = '有'
         elif _['seatType'] == '硬座':
