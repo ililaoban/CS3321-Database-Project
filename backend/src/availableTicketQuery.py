@@ -19,10 +19,10 @@ def availableTicketQuery(trainNoOnly, startStation, endStation):
         "dayOfWeek" : {string},
         "trainNo" : {string},
         "endTime" : {string},
-        "priceinfo" : [
+        "priceInfo" : [
             {
                 "seatType",
-                "availableSeat": {true or false},
+                "availableSeats": {true or false},
                 "ticketPrice"
             }, ...
         ]
@@ -75,9 +75,9 @@ def availableTicketQuery(trainNoOnly, startStation, endStation):
         ''', (trainNoOnly, int.from_bytes(result[i]['testbit'], byteorder='big'), int.from_bytes(result[i]['testbit'], byteorder='big')))
         result_2 = cursor.fetchone()
         if not result_2:
-            result[i]['availableSeat'] = "无"
+            result[i]['availableSeats'] = "无"
         else:
-            result[i]['availableSeat'] = "有"
+            result[i]['availableSeats'] = "有"
     
 
     
@@ -85,7 +85,7 @@ def availableTicketQuery(trainNoOnly, startStation, endStation):
     for i in range(len(result)):
         result[i].pop('testbit')
 
-    result = dict(priceinfo = result)
+    result = dict(priceInfo = result)
 
     
     # based on the start Station to get the start time
