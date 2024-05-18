@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Popover, Space, Table, Tag, message} from 'antd';
+import {Button, Popover, Space, Table, Tag, message, ConfigProvider } from 'antd';
 import {Link, useNavigate } from "react-router-dom";
 //import { useHistory } from 'react-router-dom';
 
@@ -154,13 +154,22 @@ const UserTickerList = (props) =>{
 
         )
     }
-    if (testInfos)
-    {data = testInfos.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
-        seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:buildticketStatus(testInfo.ticketStatus,testInfo.ticketNo),})))}
+    // if (testInfos) {
+    //     messageApi.error("当前无购票记录")
+    // }
 
+        data = testInfos?.map(((testInfo, index)=>({key:index,trainInfo:buildTrainInfo(testInfo), passengerInfo:buildPassengerInfo(testInfo),
+        seatInfo:buildSeatInfo(testInfo), ticketPrice:buildTicketPrice(testInfo), ticketState:buildticketStatus(testInfo.ticketStatus,testInfo.ticketNo),})))
+        const locale = {
+            emptyText: "无购票记录",
+        };
 
     return (<div>
         {contextHolder}
-        <Table  tableLayout="fixed" columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}}/>
-    </div>)};
+
+             <Table  tableLayout="fixed" columns={columns} dataSource={data} style={{marginLeft:"15%",width:"70%"}} locale = {locale}/>
+
+    </div>)
+}
+;
 export default UserTickerList;

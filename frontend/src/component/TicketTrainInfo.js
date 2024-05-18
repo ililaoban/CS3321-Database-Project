@@ -25,9 +25,8 @@ const TicketTrainInfo = (props)=>
         <span style={spanStyle}>{ticketInfo.trainNo||""}</span>
         <span>次 </span>
         <span style={spanStyle}>{ticketInfo.startStation||""}</span>
-        <span>站 </span>
         <span style={spanStyle}>({ticketInfo.startTime||""}开) ——{ticketInfo.endStation||""}</span>
-        <span>站（{ticketInfo.endTime||""}到）</span>
+        <span>（{ticketInfo.endTime||""}到）</span>
 
         <hr/>
 

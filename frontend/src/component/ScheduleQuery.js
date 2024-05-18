@@ -2,7 +2,7 @@ import Checkbox from "antd/es/checkbox/Checkbox";
 import {useState, useEffect} from "react";
 import {Content} from "antd/es/layout/layout";
 import TrainList from "./TrainList";
-import { DatePicker, Space, Input, Button } from 'antd';
+import { DatePicker, Space, Input, Button, message } from 'antd';
 import dayjs from 'dayjs';
 import axios from 'axios';
 
@@ -13,6 +13,8 @@ const apiUrl = process.env.REACT_APP_BASE_URL
 const ScheduleQuery = (props)=>{
     const setSchedule = props.setSchedule;
     const setOpen = props.setOpen;
+
+    const [messageApi, contextHolder] = message.useMessage();
 
     const [date, setDate] = useState(dayjs());
     const [trainNo, setTrainNo] = useState(null);
@@ -25,7 +27,12 @@ const ScheduleQuery = (props)=>{
             .then(res=> res.data)
             .then(trainInfo=>{
                 //console.log(trainInfo.stations);
-                setSchedule(trainInfo);
+                if (trainInfo) {
+                    setOpen(true);
+                    setSchedule(trainInfo);
+                }else{
+                    messageApi.error("没有符合条件的车次")
+                }
             }).catch(error=>{
             console.error(error);
         })
@@ -35,6 +42,8 @@ const ScheduleQuery = (props)=>{
 
     return(
         <div style={{backgroundColor: "white", padding: 5, marginTop: 10, borderRadius: 10}}>
+            {contextHolder}
+
             <p style={{textAlign: "center", fontWeight: 600, fontSize: 20}}>
                 列车时刻表查询
             </p>
@@ -60,7 +69,6 @@ const ScheduleQuery = (props)=>{
                         if (!(trainNo&&date)){
                             return;}
                         console.log("Clicked!")
-                        setOpen(true);
                         fetchSchedule();
                     }}
             >

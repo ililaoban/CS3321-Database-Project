@@ -43,7 +43,7 @@ const buildSeatLevel = (tickInfo)=>{
     return tickInfo.map(info=>(
         {
             value:info.seatType,
-            label:info.seatType+" ("+info.ticketPrice+")"
+            label:info.seatType+" ("+info.ticketPrice+"元)"
         }
     ))
 }

@@ -10,7 +10,7 @@ const apiUrl = process.env.REACT_APP_BASE_URL
 const TicketPurchasePage = ()=>{
     let location = useLocation();
 
-    let {trainNoOnly} = location.state ||{}
+    let {trainNoOnly, startStation, endStation} = location.state ||{}
 
     const [ticketInfo, setTicketInfo] = useState(null)
     const [passengerInfo, setPassengerInfo] = useState(null)
@@ -21,11 +21,14 @@ const TicketPurchasePage = ()=>{
         const url = apiUrl + "/queryTicketBasedOnTrain"
         axios.post(url, {
             trainNoOnly: trainNoOnly,
-            startStation:"兰州西站",
-            endStation:"北京南站"
+            startStation: startStation,
+            endStation: endStation
 
         }).then(res=>res.data)
             .then(ticketInfo=>{
+                ticketInfo.startStation = startStation
+                ticketInfo.endStation = endStation
+                console.log("ticketInfo is ", ticketInfo)
                 setTicketInfo(ticketInfo)
             }).catch(e=>{
                 console.log(e)

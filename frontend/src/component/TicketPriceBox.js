@@ -7,12 +7,12 @@ const TicketPriceBox = (props)=>{
         return null
 
     const ticketData = props.ticketPriceInfo.map((info, index)=>{
-        if (info.available) {
+        if (info.availableSeats == "有") {
             return (
                 <span>
                     <span>{info.seatType}</span>
                     <span> (</span>
-                    <span style={{color:"orange"}}>{info.ticketPrice}</span>
+                    <span style={{color:"orange"}}>{info.ticketPrice}元</span>
                     <span>) </span>
                     <span>{info.ticketNum}&emsp;</span>
                 </span>
@@ -22,7 +22,7 @@ const TicketPriceBox = (props)=>{
                 <span style={{color:"darkgrey"}}>
                     <span>{info.seatType}</span>
                     <span> (</span>
-                    <span >{info.ticketPrice}</span>
+                    <span >{info.ticketPrice}元</span>
                     <span>) </span>
                     <span>{info.ticketNum}&emsp;</span>
                 </span>
