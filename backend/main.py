@@ -519,8 +519,8 @@ def queryTicketBasedOnTrain():
     trainNoOnly=data['trainNoOnly']
     startStation=data['startStation']
     endStation=data['endStation']
-    results = src.queryTicketBasedOnTrain(trainNoOnly, startStation, endStation)
-    return jsonify({"priceInfo":results})
+    results = src.availableTicketQuery(trainNoOnly, startStation, endStation)
+    return jsonify(results)
 
     
 if __name__ == "__main__":
