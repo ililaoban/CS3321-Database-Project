@@ -50,7 +50,7 @@ def initialLaunchTime_1(trainNoOnly):
     conn.close()
 
     if len(result) == 0:
-        return dict()
+        return None
 
     # result time fix
     for i in result:
@@ -127,7 +127,7 @@ def initialLaunchTime_2(trainNoOnly):
     conn.close()
 
     if len(result) == 0:
-        return dict()
+        return None
 
     # result time fix
     for i in result:
