@@ -116,14 +116,12 @@ def queryBasedOnStartEndTime():
 def buyTicket():
     # 预计请求
     """
-    出发日期:2019-01-01
-    车次:G101
-    上车时间:08:00
+    唯一车次:G101
     上车站：北京
     下车站：上海
     座位类型：二等座
     车票类型：成人票
-    用户id:123
+    sfz:123
     """
     data=request.get_json()
         # startDay = request.form["startDay"]
@@ -134,33 +132,28 @@ def buyTicket():
         # seatType = request.form["seatType"]
         # ticketType = request.form["ticketType"]
         # userId = request.form["userId"]
-    startDay = data["startDay"]
-    trainNo = data["trainNo"]
-    startTime = data["startTime"]
+    trainNoOnly = data["trainNoOnly"]
     startStation = data["startStation"]
     endStation = data["endStation"]
     seatType = data["seatType"]
     ticketType = data["ticketType"]
-    userId = data["userId"]
+    sfzNo = data["sfzNo"]
 
-
-
-
-    # 购票操作 待实现
-
+    # 购票操作
+    result = src.buy(trainNoOnly, startStation, endStation, seatType, sfzNo)
     # 返回购票结果
-    result = True
-    ticketNo = ("%s" % random.randint(100000000, 999999999))
-    carriageNo = "1"
-    seatNo = ("%s" % random.randint(1, 100))
+    # result = True
+    # ticketNo = ("%s" % random.randint(100000000, 999999999))
+    # carriageNo = "1"
+    # seatNo = ("%s" % random.randint(1, 100))
 
-    dic = {
-        "result": result,
-        "ticketNo": ticketNo,
-        "carriageNo": carriageNo,
-        "seatNo": seatNo,
-    }
-    return jsonify(dic)
+    # dic = {
+    #     "result": result,
+    #     "ticketNo": ticketNo,
+    #     "carriageNo": carriageNo,
+    #     "seatNo": seatNo,
+    # }
+    return jsonify(result)
 
 
 # 场景三实现:查询用户购票信息

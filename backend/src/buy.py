@@ -13,7 +13,7 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     result1 = cursor.fetchone()
     if not result1:
         print("Price INFO not found")
-        return
+        return {"result":False}
     testbit = int.from_bytes(result1['testbit'], byteorder='big')
     ticketPrice = result1['ticketPrice']
 
@@ -25,7 +25,7 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     result2 = cursor.fetchone()
     if not result2:
         print("No available seat!")
-        return
+        return {"result":False}
     carriageNo = result2['carriageNo']
     seatNo = result2['seatNo']
     bitmap = int.from_bytes(result2['bitmap'], byteorder='big')
@@ -59,6 +59,7 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     print("------------------------")
     cursor.close()
     conn.close()
+    return {"result":True, "ticketNo":1, "carriageNo":carriageNo, "seatNo":seatNo}
 
 
 
