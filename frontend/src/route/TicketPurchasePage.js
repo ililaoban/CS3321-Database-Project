@@ -28,6 +28,7 @@ const TicketPurchasePage = ()=>{
             .then(ticketInfo=>{
                 ticketInfo.startStation = startStation
                 ticketInfo.endStation = endStation
+                ticketInfo.trainNoOnly = trainNoOnly
                 console.log("ticketInfo is ", ticketInfo)
                 setTicketInfo(ticketInfo)
             }).catch(e=>{

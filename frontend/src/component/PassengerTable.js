@@ -70,7 +70,11 @@ const PassengerTable = (props)=> {
         {index:index+1,
             ticketType: <Select defaultValue={ticketType[0]} options={ticketType} style={{minWidth: "70%",}}/>,
             passengerName:<Input style={{width:"100%",color:"#000000",backgroundColor:"#ffffff"}} disabled={true} value={value.passengerName}/>,
-            seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"90%"}}/>,
+            seatLevel: <Select defaultValue={seatLevel[0]} options={seatLevel} style={{width:"90%"}} onChange={(value)=>{
+                console.log(value);
+                props.updateSelectedSeatType(value);
+            }
+            }/>,
             idType:<Select defaultValue={idType[0]} options={idType} style={{minWidth: "80%",}}/>,
             idNo:<Input disabled={true} value={value.sfzNo} style = {{color:"#000000",backgroundColor:"#ffffff", minWidth:"90%"}}/>}
     ))):null;

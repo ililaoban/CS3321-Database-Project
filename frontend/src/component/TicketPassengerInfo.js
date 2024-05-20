@@ -32,9 +32,12 @@ const TicketPassengerInfo = (props)=>{
 
         <p>乘车人</p>
         <Checkbox.Group options={passengerOptions}  onChange={(values)=>{
+            console.log(values);
             props.updateSelectedPassenger(values)
         }}/>
-        <PassengerTable selectedPassenger={props.selectPassenger} priceInfo={props.priceInfo}/>
+        <PassengerTable selectedPassenger={props.selectPassenger}
+                        updateSelectedSeatType={props.updateSelectedSeatType}
+                        priceInfo={props.priceInfo}/>
 
 
 
