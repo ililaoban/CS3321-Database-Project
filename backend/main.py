@@ -472,6 +472,7 @@ def register():
     data=request.get_json()
     userId=data['userId']
     password=data['password']
+    passengerName = data['passengerName']
 
     dic={
         "result":True
@@ -485,15 +486,12 @@ def login():
     data=request.get_json()
     userId=data['userId']
     password=data['password']
-
-    dic={
-        "result":True
-    }
+    dic=src.login(userId, password)
     return jsonify(dic)
 
 
 
-#场景十实现： 用户信息填写
+#场景十实现： 用户信息填写 暂时废弃
 @app.route("/userInfoChange", methods=["POST"])
 def userInfoChange():
     data=request.get_json()
