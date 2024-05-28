@@ -136,7 +136,7 @@ def buyTicket():
     startStation = data["startStation"]
     endStation = data["endStation"]
     seatType = data["seatType"]
-    ticketType = data["ticketType"]
+    #ticketType = data["ticketType"]
     sfzNo = data["sfzNo"]
 
     # 购票操作
