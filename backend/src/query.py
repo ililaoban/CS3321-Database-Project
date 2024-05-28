@@ -131,7 +131,7 @@ def query(startStation, endStation, startDay):
     # only show hour: miniute
     for _ in result4:
         
-        _['startTime'] = _['startTime'][-8:-2]
-        _['endTime'] = _['endTime'][-8:-2]
+        _['startTime'] = _['startTime'][-8:-3]
+        _['endTime'] = _['endTime'][-8:-3]
 
     return result4
