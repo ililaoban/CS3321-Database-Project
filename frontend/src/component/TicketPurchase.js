@@ -78,8 +78,10 @@ const TicketPurchase = (props) =>{
         if (!selectPassenger || selectPassenger.length === 0)
             messageApi.error("请完善乘客信息！");
         else {
+            messageApi.info("购票中，请稍后！");
+
             console.log("seatType is", selectSeatType);
-            axios.post(apiUrl+"/buy1",{
+            axios.post(apiUrl+"/buy",{
                 trainNoOnly: ticketInfo.trainNoOnly,
                 startStation: ticketInfo.startStation,
                 endStation: ticketInfo.endStation,
@@ -89,7 +91,7 @@ const TicketPurchase = (props) =>{
                 .then((info)=>{
                     if (info.result) {
                         messageApi.success("购票成功！")
-                        showModal(info.carraigeNo, info.seatNo);
+                        showModal(info.carriageNo, info.seatNo);
                     }else{
                         messageApi.error("购票失败：没有足够的票！")
                     }

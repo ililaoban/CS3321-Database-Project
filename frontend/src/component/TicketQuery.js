@@ -71,13 +71,13 @@ const TicketQuery = (props) =>{
         if (savedStart){
             setStart(savedStart)
         }else{
-            setStart("北京")
+            setStart("北京南站")
         }
         const savedEnd = JSON.parse(sessionStorage.getItem("end"));
         if (savedEnd){
             setEnd(savedEnd)
         }else{
-            setEnd("上海")
+            setEnd("上海东站")
         }
         const savedDate = (sessionStorage.getItem("date"));
         if (savedDate){

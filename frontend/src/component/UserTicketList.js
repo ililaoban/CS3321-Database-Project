@@ -141,8 +141,11 @@ const UserTickerList = (props) =>{
                     }).then(res=>res.data)
                         .then(res =>{
                             if (res.result){
-                                messageApi.success("退票成功！")
-                                history(0);
+                                messageApi.success("退票成功,页面即将刷新！")
+                                setTimeout(function() {
+                                    // 刷新页面
+                                    history(0);
+                                }, 2000);
                             }else{
                                 messageApi.error("退票失败！")
                             }
