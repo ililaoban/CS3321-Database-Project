@@ -40,7 +40,7 @@ def initialLaunchTime_1(trainNoOnly):
 
     conn, cursor = newSqlSession()
     cursor.execute('''
-    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%H小时%%i分钟%%s秒') as stopTime
+    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%i分钟') as stopTime
     FROM TrainStation
     WHERE trainNoOnly=%s
     ORDER BY stationOrder
@@ -56,10 +56,12 @@ def initialLaunchTime_1(trainNoOnly):
     for i in result:
         if i['stopTime'] == None:
             pass
-        elif i['stopTime'].startswith('00小时00分钟'):
-            i['stopTime'] = i['stopTime'][8:]
-        elif i['stopTime'].startswith('00小时'):
-            i['stopTime'] = i['stopTime'][4:]
+        # BobHuangC : 仅需显示至分钟, 
+        # i['stopTime'] = i['stopTime'][4:]
+        # elif i['stopTime'].startswith('00小时00分钟'):
+        #     i['stopTime'] = i['stopTime'][8:]
+        # elif i['stopTime'].startswith('00小时'):
+        #     i['stopTime'] = i['stopTime'][4:]
 
 
     res = {}
@@ -117,7 +119,7 @@ def initialLaunchTime_2(trainNoOnly):
 
     conn, cursor = newSqlSession()
     cursor.execute('''
-    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%H:%%i') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%H:%%i') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%H小时%%i分钟%%s秒') as stopTime
+    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%H:%%i') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%H:%%i') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%i分钟') as stopTime
     FROM TrainStation
     WHERE trainNoOnly=%s
     ORDER BY stationOrder

@@ -125,5 +125,13 @@ def query(startStation, endStation, startDay):
             or 'secondSeat' in _train.keys() 
             or 'softSeat' in _train.keys() 
             or 'hardSeat' in _train.keys()) else False
+        
+    # BobHuangC:
+    # fix the format for start time and end time
+    # only show hour: miniute
+    for _ in result4:
+        
+        _['startTime'] = _['startTime'][-8:-2]
+        _['endTime'] = _['endTime'][-8:-2]
 
     return result4
