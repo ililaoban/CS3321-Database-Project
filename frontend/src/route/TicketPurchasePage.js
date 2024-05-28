@@ -1,7 +1,7 @@
 import TicketPurchase from "../component/TicketPurchase";
 import {useEffect, useState} from "react";
 import {getAvailableTicketInfo, getPassengerInfo} from "../train";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_BASE_URL
@@ -9,7 +9,7 @@ const apiUrl = process.env.REACT_APP_BASE_URL
 
 const TicketPurchasePage = ()=>{
     let location = useLocation();
-
+    let navigate = useNavigate();
     let {trainNoOnly, startStation, endStation} = location.state ||{}
 
     const [ticketInfo, setTicketInfo] = useState(null)
@@ -18,6 +18,11 @@ const TicketPurchasePage = ()=>{
 
 
     useEffect(()=>{
+        const userId = localStorage.getItem("userId")
+        if (userId ==null || userId == ""){
+            navigate('/login')
+            return
+        }
         const url = apiUrl + "/queryTicketBasedOnTrain"
         axios.post(url, {
             trainNoOnly: trainNoOnly,

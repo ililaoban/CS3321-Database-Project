@@ -123,6 +123,7 @@ const columns = [
 
 
 const UserTickerList = (props) =>{
+    console.log("userTiceketList ok")
     let data = null
     const testInfos = props.trainInfo
     const [messageApi, contextHolder] = message.useMessage();

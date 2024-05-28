@@ -25,7 +25,6 @@ const router = createBrowserRouter([
             {
                 index:true,
                 element:<Home/>,
-                isCache: true,
             },
             {
                 path:"user",
