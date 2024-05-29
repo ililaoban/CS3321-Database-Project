@@ -474,9 +474,7 @@ def register():
     password=data['password']
     passengerName = data['passengerName']
 
-    dic={
-        "result":True
-    }
+    dic=src.register(userId,password, passengerName)
     return jsonify(dic)
 
 
