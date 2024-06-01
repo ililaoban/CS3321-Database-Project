@@ -160,6 +160,7 @@ def queryStationByCity(cityName):
         if result1 == None:
             break
         result.append(result1['stationName'])
+    conn_1.close()
     return (result)  
 
 def query2(start, end, startDay):
@@ -168,5 +169,5 @@ def query2(start, end, startDay):
     return queryByList(startStationList, endStationList, startDay)
 
 if __name__ == '__main__':
-    print(queryStationByCity("上海站"))
+    print(query("北京北站", "上海虹桥站", "2024-05-25"))
     
