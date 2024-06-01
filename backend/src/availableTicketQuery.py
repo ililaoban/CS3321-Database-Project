@@ -100,7 +100,7 @@ def availableTicketQuery(trainNoOnly, startStation, endStation):
     result['startTime'] = result_3['startTime']
     result['dayOfWeek'] = number_to_day_of_week(result_3['dayOfWeek'])
     # TODO(BobHuangC) : in the 1-st dev stage, we only use the trainNoOnly (no trainNo)
-    result['trainNo'] = trainNoOnly
+    result['trainNo'] = result_3['trainNo']
 
     # based on the end Station to get the end time
     cursor.execute('''

@@ -18,6 +18,8 @@ import dayjs from 'dayjs';
 const Home = () =>{
     const [trainInfo, setTrainInfo] = useState(null)
     const [messageApi, contextHolder] = message.useMessage();
+    const [open, setOpen] = useState(false);
+    const [schedule, setSchedule] = useState(null);
 
     const updateTrainInfo = (start, end, date)=>{
         //"2024-04-27T16:00:00.000Z"
@@ -71,14 +73,25 @@ const Home = () =>{
 
 return (<Layout>
         <Sider style={{backgroundColor:"transparent"}} width={"auto"} >
-            <TicketQuery updateTrainInfo={updateTrainInfo}/>
-            <TrainSchedule/>
+            <TicketQuery
+                updateTrainInfo={updateTrainInfo}
+            />
+            <TrainSchedule
+                open = {open}
+                setOpen = {setOpen}
+                setSchedule = {setSchedule}
+                schedule = {schedule}
+            />
         </Sider>
         <Content>
             {contextHolder}
 
             <div  style={{ margin: '20px 16px 0',}}>
-                <FilteredTrainList_2 trainInfo={trainInfo}/>
+                <FilteredTrainList_2
+                    trainInfo={trainInfo}
+                    setOpen = {setOpen}
+                    setSchedule = {setSchedule}
+                />
             </div>
 
         </Content>

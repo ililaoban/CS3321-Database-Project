@@ -51,6 +51,8 @@ def cityStationList():
                         'cityName': i['cityName'],
                         'children': [
                             {
+                                'stationName': i['cityName'] + '市'
+                            },{
                                 'stationName': i['stationName']
                             }
                         ]
@@ -66,6 +68,9 @@ def cityStationList():
                 res[-1]['children'].append({
                     'cityName': i['cityName'],
                     'children': [
+                        {
+                                'stationName': i['cityName'] + '市'
+                            },
                         {
                             'stationName': i['stationName']
                         }

@@ -20,12 +20,12 @@ const TicketCard = (props)=>{
                 <span style={{fontSize: 20}}> {ticketInfo.startDay} {ticketInfo.startTime}</span>
             </p>
             <p>
-                <span style={{fontSize:25,fontWeight: "bold"}}>{ticketInfo.startStation}</span>&ensp;站
+                <span style={{fontSize:25,fontWeight: "bold"}}>{ticketInfo.startStation}</span>&ensp;
                 <span style={{marginRight:10,display:"inline-flex",marginLeft:10,fontWeight: "bold", fontSize:20}}>
                     --{ticketInfo.trainNo}-->
 
                 </span>
-                <span style={{fontSize:25,fontWeight: "bold"}}>{ticketInfo.endStation}</span>&ensp;站
+                <span style={{fontSize:25,fontWeight: "bold"}}>{ticketInfo.endStation}</span>&ensp;
 
             </p>
             <p>

@@ -45,7 +45,10 @@ const FilteredTrainList_2 = (props) => {
                        endStations={endStations}
 
             />
-            <TrainList trainInfo={filteredInfo} />
+            <TrainList trainInfo={filteredInfo}
+                       setOpen = {props.setOpen}
+                       setSchedule = {props.setSchedule}
+            />
         </div>
     )
 

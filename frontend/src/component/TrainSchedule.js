@@ -8,20 +8,19 @@ import ScheduleQuery from "./ScheduleQuery";
 import TrainInfoList from "./TrainInfoList";
 
 const TrainSchedule = (props)=>{
-    const [open, setOpen] = useState(false);
-    const [schedule, setSchedule] = useState(null);
+
 
     return (
         <div>
-            <ScheduleQuery setOpen={setOpen}
-                           setSchedule={setSchedule}
+            <ScheduleQuery setOpen={props.setOpen}
+                           setSchedule={props.setSchedule}
             />
             <Drawer  width={500}
-                     title="列车时刻表" open={open} onClose={()=>{
-                setOpen(false);
+                     title="列车时刻表" open={props.open} onClose={()=>{
+                props.setOpen(false);
             }}>
-                <h2>{schedule?.trainNo}</h2>
-            <TrainInfoList schedule={schedule?.stations}/>
+                <h2>{props.schedule?.trainNo}</h2>
+            <TrainInfoList schedule={props.schedule?.stations}/>
             </Drawer>
         </div>
     )

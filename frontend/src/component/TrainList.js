@@ -2,12 +2,38 @@ import {Button, Table} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {queryTrain} from "../train";
-
+import axios from 'axios';
+const apiUrl = process.env.REACT_APP_BASE_URL
 
 const TrainList = (props) =>{
     let navigate = useNavigate();
     const trainInfo = props.trainInfo;
-    const data = trainInfo ? (trainInfo.map((train,index)=>({key:index, trainNo:train.trainNo,
+    const setOpen = props.setOpen;
+    const setSchedule = props.setSchedule;
+
+    const data = trainInfo ? (trainInfo.map((train,index)=>({
+            key:index,
+            trainNo:<button
+                style={{ backgroundColor: 'transparent', border: 'none' }}
+                    onClick={()=>{
+                        console.log("intend to open schedule")
+                        axios.post(apiUrl+"/trainNo/initialLaunchTime_2", {trainNoOnly: train.trainNoOnly})
+                            .then(res=> res.data)
+                            .then(trainInfo=>{
+                                //console.log(trainInfo.stations);
+                                if (trainInfo) {
+                                    setOpen(true);
+                                    trainInfo.trainNo = train.trainNo;
+                                    setSchedule(trainInfo);
+                                }
+                            }).catch(error=>{
+                            console.error(error);
+                        })
+                    }}
+                    >
+                <u>{train.trainNo}</u>
+            </button>
+            ,
         startEndStation:(<><p>{train.startStation}</p><p>{train.endStation}</p></>),
         startEndTime:(<><p>{train.startTime}</p><p>{train.endTime}</p></>), duration:train.duration,
         specialSeatAndBusinessSeat:train.specialSeatAndBusinessSeat||"---",

@@ -29,6 +29,7 @@ const ScheduleQuery = (props)=>{
                 //console.log(trainInfo.stations);
                 if (trainInfo) {
                     setOpen(true);
+                    trainInfo.trainNo = trainNo;
                     setSchedule(trainInfo);
                 }else{
                     messageApi.error("没有符合条件的车次")

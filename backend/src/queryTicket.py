@@ -63,7 +63,7 @@ def queryTicket(sfzNo):
     # 3rd to get the startDay, startTime
     for i in range(len(result)):
         cursor_1.execute('''
-        SELECT DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d') as startDay, DATE_FORMAT(trainDepartTime, '%%H:%%i:%%s') as startTime
+        SELECT DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d') as startDay, DATE_FORMAT(trainDepartTime, '%%H:%%i') as startTime
         FROM TrainStation
         WHERE trainNoOnly = %s AND stationName = %s
         ''', (result[i]['trainNoOnly'], result[i]['startStation']))
@@ -93,6 +93,18 @@ def queryTicket(sfzNo):
         ''', result[i]['sfzNo'])
         result_5 = cursor_1.fetchone()
         result[i]['passengerName'] = result_5['name']
+
+    # 6th to get trainNo
+    for i in range(len(result)):
+        cursor_1.execute('''
+        SELECT trainNo
+        FROM TrainStation
+        WHERE trainNoOnly = %s
+        AND stationName = %s
+        ''', (result[i]['trainNoOnly'], result[i]['startStation']))
+        result_6 = cursor_1.fetchone()
+        result[i]['trainNo'] = result_6['trainNo']
+
 
     cursor_1.close()
     conn_1.close()

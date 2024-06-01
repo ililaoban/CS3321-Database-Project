@@ -62,13 +62,14 @@ def query(startStation, endStation, startDay):
     for i in range(len(result1)):
         cursor_1.execute(
             '''
-            SELECT DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d') as startDay, DATE_FORMAT(trainDepartTime, '%%H:%%i:%%s') as startTime
+            SELECT DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d') as startDay, DATE_FORMAT(trainDepartTime, '%%H:%%i:%%s') as startTime, trainNo
             FROM TrainStation
             WHERE trainNoOnly=%s AND stationName=%s
         ''',(result1[i]['trainNoOnly'], startStation))
         result2 = cursor_1.fetchone()
         result1[i]['startDay'] = result2['startDay']
         result1[i]['startTime'] = result2['startTime']
+        result1[i]['trainNo'] = result2['trainNo']
 
         cursor_1.execute(
             '''
@@ -90,7 +91,7 @@ def query(startStation, endStation, startDay):
         if _['trainNoOnly'] not in result3.keys():
 
             result3[_['trainNoOnly']] = {'trainNoOnly':_['trainNoOnly'], 'startStation':startStation, 'endStation':endStation, 
-                              'startTime':_['startTime'], 'endTime':_['endTime'], 'duration':None,}            
+                              'startTime':_['startTime'], 'endTime':_['endTime'], 'duration':None, 'trainNo':_['trainNo']}            
 
             
         if _['seatType'] == '一等座':
@@ -135,3 +136,37 @@ def query(startStation, endStation, startDay):
         _['endTime'] = _['endTime'][-8:-3]
 
     return result4
+
+def queryByList(startStationList, endStationList, startDay):
+    result = []
+    for st in startStationList:
+        for ed in endStationList:
+            result+= query(st, ed, startDay)
+    return result
+
+def queryStationByCity(cityName):
+    if (cityName[-1] == '站'):
+        return [cityName]
+    result = []
+    conn_1, cursor_1 = newSqlSession()
+    cursor_1.execute(
+        '''
+        SELECT stationName
+        FROM Station
+        WHERE cityName=%s
+    ''',(cityName[:-1]))
+    while True:
+        result1 = cursor_1.fetchone()
+        if result1 == None:
+            break
+        result.append(result1['stationName'])
+    return (result)  
+
+def query2(start, end, startDay):
+    startStationList = queryStationByCity(start)
+    endStationList = queryStationByCity(end)
+    return queryByList(startStationList, endStationList, startDay)
+
+if __name__ == '__main__':
+    print(queryStationByCity("上海站"))
+    

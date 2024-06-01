@@ -2,7 +2,7 @@ from utils import newSqlSession
 
 
 # Query the ticket based on trainNoOnly rather than trainNo, the time is redundant
-def initialLaunchTime_1(trainNoOnly):
+def initialLaunchTime_1(trainNo):
     """
     Occasion 5.1 The user queries the train timetable based on the trainNoOnly
     
@@ -40,44 +40,20 @@ def initialLaunchTime_1(trainNoOnly):
 
     conn, cursor = newSqlSession()
     cursor.execute('''
-    SELECT trainNoOnly,stationName, stationOrder, trainNo,DATE_FORMAT(trainArriveTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainArriveTime, DATE_FORMAT(trainDepartTime, '%%Y-%%m-%%d %%H:%%i:%%s') as trainDepartTime, TIME_FORMAT(TIMEDIFF(trainDepartTime, trainArriveTime), '%%i分钟') as stopTime
+    SELECT trainNoOnly
     FROM TrainStation
-    WHERE trainNoOnly=%s
+    WHERE trainNo=%s
     ORDER BY stationOrder
-    ''', (trainNoOnly))
+    ''', (trainNo))
     result = cursor.fetchall()
     cursor.close()
     conn.close()
 
     if len(result) == 0:
         return None
+    trainNoOnly = result[0]['trainNoOnly']
+    return initialLaunchTime_2(trainNoOnly)
 
-    # result time fix
-    for i in result:
-        if i['stopTime'] == None:
-            pass
-        # BobHuangC : 仅需显示至分钟, 
-        # i['stopTime'] = i['stopTime'][4:]
-        # elif i['stopTime'].startswith('00小时00分钟'):
-        #     i['stopTime'] = i['stopTime'][8:]
-        # elif i['stopTime'].startswith('00小时'):
-        #     i['stopTime'] = i['stopTime'][4:]
-
-
-    res = {}
-    res['trainNoOnly'] = result[0]['trainNoOnly']
-    res['stations'] = []
-    for i in result:
-        res['stations'].append({
-            'stationOrder': i['stationOrder'],
-            'stationName': i['stationName'],
-            'trainArriveTime': '--' if i['trainArriveTime'] == None else i['trainArriveTime'],
-            'trainDepartTime': '--' if i['trainDepartTime'] == None else i['trainDepartTime'],
-            'stopTime': '--' if i['stopTime'] == None else i['stopTime']
-        })
-    res['initialLaunchTime'] = res['stations'][0]['trainDepartTime']
-
-    return res
 
 
 
