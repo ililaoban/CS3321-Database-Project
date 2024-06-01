@@ -47,7 +47,7 @@ from utils import newSqlSession
 # TODO(BobHuangC): the implementation is not efficient, we can optimize it later
 def query(startStation, endStation, startDay):
 
-    # 1. imitate the logic of buy to get the trainNoOnly, seatTYpe, ticketPrice, testbit of all trains from startStation to endStation
+    # 1. imitate the logic of buy to get the trainNoOnly, seatType, ticketPrice, testbit of all trains from startStation to endStation
     conn_1, cursor_1 = newSqlSession()
     cursor_1.execute(
         '''
@@ -93,15 +93,57 @@ def query(startStation, endStation, startDay):
             result3[_['trainNoOnly']] = {'trainNoOnly':_['trainNoOnly'], 'startStation':startStation, 'endStation':endStation, 
                               'startTime':_['startTime'], 'endTime':_['endTime'], 'duration':None, 'trainNo':_['trainNo']}            
 
-            
+        
+        # (BobHuangC) add the logic using testbit to test whether the seatType exists
+        # first to set it as '无', then to use the testbit to test whether it is available
         if _['seatType'] == '一等座':
-            result3[_['trainNoOnly']]['firstSeat'] = '有'
+            cursor_1.execute(
+                '''
+                SELECT bitmap
+                FROM Seat
+                WHERE trainNoOnly=%s AND bitmap&%s=%s AND seatType=%s
+            ''', (_['trainNoOnly'], int.from_bytes(_['testbit'], byteorder='big'), int.from_bytes(_['testbit'], byteorder='big'), _['seatType']))
+            result4 = cursor_1.fetchone()
+            if result4:
+                result3[_['trainNoOnly']]['firstSeat'] = '有'
+            else:
+                result3[_['trainNoOnly']]['firstSeat'] = '无'
         elif _['seatType'] == '二等座':
-            result3[_['trainNoOnly']]['secondSeatAndSecondBoxSeat'] = '有'
+            cursor_1.execute(
+                '''
+                SELECT bitmap
+                FROM Seat
+                WHERE trainNoOnly=%s AND bitmap&%s=%s AND seatType=%s
+            ''', (_['trainNoOnly'], int.from_bytes(_['testbit'], byteorder='big'), int.from_bytes(_['testbit'], byteorder='big'), _['seatType']))
+            result4 = cursor_1.fetchone()
+            if result4:
+                result3[_['trainNoOnly']]['secondSeat'] = '有'
+            else:
+                result3[_['trainNoOnly']]['secondSeat'] = '无'
         elif _['seatType'] == '软座':
-            result3[_['trainNoOnly']]['softSeat'] = '有'
+            cursor_1.execute(
+                '''
+                SELECT bitmap
+                FROM Seat
+                WHERE trainNoOnly=%s AND bitmap&%s=%s AND seatType=%s
+            ''', (_['trainNoOnly'], int.from_bytes(_['testbit'], byteorder='big'), int.from_bytes(_['testbit'], byteorder='big'), _['seatType']))
+            result4 = cursor_1.fetchone()
+            if result4:
+                result3[_['trainNoOnly']]['softSeat'] = '有'
+            else:
+                result3[_['trainNoOnly']]['softSeat'] = '无'
         elif _['seatType'] == '硬座':
-            result3[_['trainNoOnly']]['hardSeat'] = '有'
+            cursor_1.execute(
+                '''
+                SELECT bitmap
+                FROM Seat
+                WHERE trainNoOnly=%s AND bitmap&%s=%s AND seatType=%s
+            ''', (_['trainNoOnly'], int.from_bytes(_['testbit'], byteorder='big'), int.from_bytes(_['testbit'], byteorder='big'), _['seatType']))
+            result4 = cursor_1.fetchone()
+            if result4:
+                result3[_['trainNoOnly']]['hardSeat'] = '有'
+            else:
+                result3[_['trainNoOnly']]['hardSeat'] = '无'
     
     cursor_1.close()
     conn_1.close()

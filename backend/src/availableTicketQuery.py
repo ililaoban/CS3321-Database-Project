@@ -71,8 +71,8 @@ def availableTicketQuery(trainNoOnly, startStation, endStation):
         cursor.execute('''
         SELECT bitmap
         FROM Seat
-        WHERE trainNoOnly = %s AND bitmap& %s = %s 
-        ''', (trainNoOnly, int.from_bytes(result[i]['testbit'], byteorder='big'), int.from_bytes(result[i]['testbit'], byteorder='big')))
+        WHERE trainNoOnly = %s AND bitmap& %s = %s AND seatType = %s
+        ''', (trainNoOnly, int.from_bytes(result[i]['testbit'], byteorder='big'), int.from_bytes(result[i]['testbit'], byteorder='big'), result[i]['seatType']))
         result_2 = cursor.fetchone()
         if not result_2:
             result[i]['availableSeats'] = "无"
