@@ -111,7 +111,7 @@ def query(startStation, endStation, startDay):
         startTime = datetime.strptime(startDay+_['startTime'], '%Y-%m-%d%H:%M:%S')
         endTime = datetime.strptime(_['endTime'], '%Y-%m-%d %H:%M:%S')
         # TODO(BobHuangC) : this might exists some bugs if the duration is negative(but the negative duration itself is a bug)
-        _['duration'] = f'{(endTime-startTime).seconds//3600}小时{(endTime-startTime).seconds%3600//60}分钟'
+        _['duration'] = f'{(endTime-startTime).seconds//3600}时{(endTime-startTime).seconds%3600//60}分'
 
 
     # 6. reorganize the results into a list
