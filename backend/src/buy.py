@@ -18,11 +18,12 @@ def buy(trainNoOnly, startStation, endStation, seatType, sfzNo):
     ticketPrice = result1['ticketPrice']
 
     #查Seat表，获得一个空余的座位
-    cursor.execute('''SELECT carriageNo,trainNoOnly,seatNo,bitmap 
+    cursor.execute('''SELECT carriageNo,seatNo,bitmap 
                FROM Seat 
-               WHERE seatType = %s AND bitmap& %s = %s ''', 
-               (seatType, testbit, testbit))
+               WHERE seatType = %s AND bitmap& %s = %s AND trainNoOnly=%s''' , 
+               (seatType, testbit, testbit, trainNoOnly))
     result2 = cursor.fetchone()
+    #print(result2)
     if not result2:
         print("No available seat!")
         return {"result":False}
