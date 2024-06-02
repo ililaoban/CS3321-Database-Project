@@ -164,10 +164,11 @@ def query(startStation, endStation, startDay):
     # TODO(BobHuangC): in the 1st-dev stage, we only have 一二等座 / 软硬座, thus the following judge condition only judge the availablity of these seats
     for _train in result4:
         _train['available'] = True if (
-            'firstSeat' in _train.keys() 
-            or 'secondSeat' in _train.keys() 
-            or 'softSeat' in _train.keys() 
-            or 'hardSeat' in _train.keys()) else False
+            ('firstSeat' in _train.keys() and _train['firstSeat'] == '有')
+            or ('secondSeat' in _train.keys() and _train['secondSeat'] == '有')
+            or ('softSeat' in _train.keys() and _train['softSeat'] == '有')
+            or ('hardSeat' in _train.keys() and _train['hardSeat'] == '有')
+            ) else False
         
     # BobHuangC:
     # fix the format for start time and end time
