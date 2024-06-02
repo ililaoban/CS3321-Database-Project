@@ -117,9 +117,9 @@ def query(startStation, endStation, startDay):
             ''', (_['trainNoOnly'], int.from_bytes(_['testbit'], byteorder='big'), int.from_bytes(_['testbit'], byteorder='big'), _['seatType']))
             result4 = cursor_1.fetchone()
             if result4:
-                result3[_['trainNoOnly']]['secondSeat'] = '有'
+                result3[_['trainNoOnly']]['secondSeatAndSecondBoxSeat'] = '有'
             else:
-                result3[_['trainNoOnly']]['secondSeat'] = '无'
+                result3[_['trainNoOnly']]['secondSeatAndSecondBoxSeat'] = '无'
         elif _['seatType'] == '软座':
             cursor_1.execute(
                 '''
