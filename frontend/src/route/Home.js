@@ -38,7 +38,9 @@ const Home = () =>{
                 }
                 console.log("traininfo is ", trainInfo)
                 setTrainInfo(trainInfo)
-                messageApi.success("已刷新")
+                if (trainInfo.length != 0) {
+                    messageApi.success("已刷新")
+                }
             }).catch(error=>{
             console.error(error);
         })
