@@ -36,11 +36,11 @@
 
 可依据车次类型、出发车站、到达车站、车次席别对查询结果进行筛选
 
-![image-20240606200423951](D:\doc\30504\大学本地\3.大三下\数据库技术\prj\CS3321-Database-Project\assets\query-3.png)
+![image-20240606200423951](assets\query-3.png)
 
 点击带有下划线的车次号，可以查看列车时刻表
 
-![image-20240606200927511](D:\doc\30504\大学本地\3.大三下\数据库技术\prj\CS3321-Database-Project\assets\buy-6.png)
+![image-20240606200927511](assets\buy-6.png)
 
 ### 3. 用户购票
 
@@ -62,11 +62,11 @@
 
 点击【行程信息提示】，生成电子客票
 
-![image-20240606200008335](D:\doc\30504\大学本地\3.大三下\数据库技术\prj\CS3321-Database-Project\assets\buy-4.png)
+![image-20240606200008335](assets\buy-4.png)
 
 点击车次号，查看列车时刻表
 
-![image-20240606200141117](D:\doc\30504\大学本地\3.大三下\数据库技术\prj\CS3321-Database-Project\assets\buy-5.png)
+![image-20240606200141117](assets\buy-5.png)
 
 ### 5. 用户退票
 
